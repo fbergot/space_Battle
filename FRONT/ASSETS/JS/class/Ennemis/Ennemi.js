@@ -1,0 +1,51 @@
+import Canvas from "../ManagerCanvas/Canvas.js";
+import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
+import utilsInstance from "../UTILS/Utils.js";
+
+class Ennemi {
+    /** @private {number} #x */
+    #x;
+    /** @private {number} #y */
+    #y;
+
+    constructor() {
+        this.utils = utilsInstance;
+        this.managerPositionInstance = new ManagerPosition(this);
+        this.managerPositionInstance.speed = this.utils.randomMinMax(2, 7);
+        this.image = this.utils.makeImage("ennemis", "soucoupe");
+        this.canvas = Canvas;
+        this.ctx = this.canvas.ctx;
+        this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
+        this.#y = this.utils.randomMinMax(-10, this.canvas.canvasHeight);
+        this.nbInstance = 0;
+    }
+
+    /**
+     * @returns {[x: number, y: number]}
+     */
+    get coordinates() {
+        return [this.#x, this.#y];
+    }
+
+    /**
+     * @param {[x: number, y: number]}
+     */
+    set coordinates(coordinatesXY) {
+        [this.#x, this.#y] = coordinatesXY;
+    }
+
+    /**
+     *
+     */
+    update(coordinatesPlayer) {
+        this.managerPositionInstance.updateCoordinatesAuto(coordinatesPlayer);
+        this.draw();
+    }
+
+    /** Function for draw the image on the canvas */
+    draw() {
+        return this.ctx.drawImage(this.image, this.#x, this.#y);
+    }
+}
+
+export default Ennemi;

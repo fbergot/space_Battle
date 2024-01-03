@@ -1,0 +1,23 @@
+{
+   "env": {
+      "browser": true,
+      "es2021": true
+   },
+   "extends": "eslint:recommended",
+   "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+   },
+   "rules": {
+      "getter-return": 1,
+      "no-const-assign": 1,
+      "no-obj-calls": 1,
+      "no-self-compare": 1,
+      "no-setter-return": 1,
+      "no-undef": 1,
+      "no-unused-private-class-members": 1,
+      "no-unused-vars": 1,
+      "no-use-before-define": 1,
+      "valid-typeof": 1
+   }
+}
