@@ -1,51 +1,61 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
-import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
+
 import utilsInstance from "../UTILS/Utils.js";
+import Bloc from "../Ennemis/Bloc.js";
 
 class ManagerBloc {
-    /** @private {number} #x */
-    #x;
-    /** @private {number} #y */
-    #y;
+    /**
+     * @type { Bloc[] } allBlocsInstances
+     * */
+    #allBlocsInstances = [];
 
-    constructor(params) {
-        this.canvas = Canvas;
-        this.ctx = Canvas.ctx;
-        this.color = params.color;
-        this.width = params.width;
-        this.heigth = params.heigth;
-        this.utils = utilsInstance;
-        this.#x = 100;
-        this.#y = 200;
-        this.managerPositionInstance = new ManagerPosition(this);
-    }
-
-    update(playerCoordinates) {
-        // this.managerPositionInstance.updateCoordinatesAuto(playerCoordinates);
-        this.draw();
-    }
-
-    /** Function for draw the bloc on the canvas */
-    draw() {
-        this.ctx.beginPath();
-        this.ctx.fillStyle = "#ddd";
-        this.ctx.strokeRect(this.#x, this.#y, this.width, this.heigth);
-        // this.ctx.strokeRect(this.#x, this.#y, this.width, this.heigth);
-        this.ctx.closePath();
+    constructor() {
+        this.Bloc = Bloc;
+        this.colors = ["#FFF", "#ADF", "blue"];
+        this.utilsInst = utilsInstance;
+        this.#allBlocsInstances = [];
     }
 
     /**
-     * @returns {[x: number, y: number]}
+     * @returns { Bloc[] }
      */
-    get coordinates() {
-        return [this.#x, this.#y];
+    get blocInstances() {
+        return this.#allBlocsInstances;
     }
 
+    blocsGeneration(nbOfInstances) {
+        let blocInstance = null;
+        const loop = (nbIteration) => {
+            if (nbIteration < nbOfInstances) {
+                blocInstance = new Bloc(this.makeBlocArguments());
+                this.#allBlocsInstances.push(blocInstance);
+                loop(nbIteration + 1);
+            }
+            return;
+        };
+        loop(0);
+    }
     /**
-     * @param {[x: number, y: number]}
+     * @returns {{ color: string, width: number, height: number }}
      */
-    set coordinates(coordinatesXY) {
-        [this.#x, this.#y] = coordinatesXY;
+    makeBlocArguments() {
+        const color = this.utilsInst.getRandomElementFromArr(this.colors);
+        const width = this.utilsInst.randomMinMax(50, 200);
+        const height = this.utilsInst.randomMinMax(50, 200);
+        return { color, width, height };
+    }
+
+    mouvementsBlocsBasic([x, y], speed) {
+        y += speed;
+        x -= speed / 2;
+        return [x, y];
+    }
+
+    updateBlocs() {
+        console.log(this.#allBlocsInstances);
+        this.#allBlocsInstances.forEach((blocInstance) => {
+            blocInstance.update(this.mouvementsBlocsBasic);
+        });
     }
 }
 

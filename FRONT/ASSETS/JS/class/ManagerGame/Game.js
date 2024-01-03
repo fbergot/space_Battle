@@ -10,37 +10,24 @@ class Game {
         this.ctx = Canvas.ctx;
         this.timer = null;
         this.utils = utilsInstance;
-        this.managerBloc = ManagerBloc;
-        this.managerPositionInstance = ManagerPositionInstance;
+        this.managerBlocInstance = new ManagerBloc();
+        this.managerPositionInstance = new ManagerPositionInstance();
         this.soucoupeInstance = new Soucoupe();
         // this.utils.$("#background").style.width = this.canvas.canvasWidth + "px";
         // this.utils.$("#background").style.height = this.canvas.canvasHeight + "px";
-        this.allBlocs = [];
     }
 
-    inserBloc(nbOfInstances) {
-        for (let i = 1; i <= nbOfInstances; i++) {
-            const blocInstance = new this.managerBloc({
-                color: "red",
-                width: this.utils.randomMinMax(50, 200),
-                heigth: this.utils.randomMinMax(50, 250),
-            });
-            this.allBlocs.push(blocInstance);
-        }
+    init(nbOfInstances) {
+        this.managerBlocInstance.blocsGeneration(nbOfInstances);
     }
 
     renderLoop(loopTime = 100) {
         const draw = () => {
             this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
-
+            this.managerBlocInstance.updateBlocs();
             this.soucoupeInstance.update();
 
             // console.log(this.allBlocs);
-
-            for (const blocInstance of this.allBlocs) {
-                // console.count("1");
-                blocInstance.update(this.soucoupeInstance.coordinates);
-            }
 
             if (!this.timer) {
                 this.timer = setTimeout(draw, loopTime);
