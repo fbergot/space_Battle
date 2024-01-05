@@ -11,16 +11,17 @@ class Bloc {
 
     /**
      * @constructor
-     * @param {{color: string, width: number, height: number}} param0
      */
-    constructor({ color, width, height }) {
-        this.speedInstance = new Speed(1);
+    constructor() {
+        this.colors = ["#FFF", "#ADF", "blue", "#AAF", "#FFF", "red"];
+        this.utils = utilsInstance;
+        this.speedInstance = new Speed();
+        this.speedInstance.valueLevel = this.utils.randomMinMax(0.8, 1.2);
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
-        this.color = color;
-        this.width = width;
-        this.height = height;
-        this.utils = utilsInstance;
+        this.color = this.utils.getRandomElementFromArr(this.colors);
+        this.width = this.utils.randomMinMax(100, 150);
+        this.height = this.utils.randomMinMax(100, 150);
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(0, 500);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);

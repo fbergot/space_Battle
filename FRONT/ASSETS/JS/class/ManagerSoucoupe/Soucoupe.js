@@ -1,5 +1,5 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
-import ManagerPosition from "../ManagerPosition/Position.js";
+import Position from "../ManagerPosition/Position.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
@@ -15,7 +15,7 @@ class Soucoupe {
     constructor() {
         this.speedInstance = new Speed(2);
         this.utils = utilsInstance;
-        this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
+        this.PositionInstance = new Position(this, this.speedInstance);
         this.image = null;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
@@ -41,8 +41,8 @@ class Soucoupe {
      * Update positions and draw on Canvas.
      */
     update() {
-        this.managerPositionInstance.updateCoordinates();
-        const direction = this.managerPositionInstance.instanceToMoveDirection;
+        this.PositionInstance.updateCoordinates();
+        const direction = this.PositionInstance.instanceToMoveDirection;
         const imgName = `player_${direction.replace("Arrow", "").toUpperCase()}`;
         this.image = this.utils.makeImage("player", imgName);
         this.draw();

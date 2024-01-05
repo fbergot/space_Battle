@@ -10,7 +10,6 @@ class ManagerBloc {
      */
     constructor() {
         this.Bloc = Bloc;
-        this.colors = ["#FFF", "#ADF", "blue"];
         this.utilsInst = utilsInstance;
         this.#allBlocsInstances = [];
     }
@@ -33,23 +32,13 @@ class ManagerBloc {
          */
         const loopRecursive = (nbIteration) => {
             if (nbIteration < nbOfInstances) {
-                blocInstance = new Bloc(this.makeBlocArguments());
+                blocInstance = new Bloc();
                 this.#allBlocsInstances.push(blocInstance);
                 loopRecursive(nbIteration + 1);
             }
             return;
         };
         loopRecursive(0);
-    }
-
-    /**
-     * @returns {{ color: string, width: number, height: number }}
-     */
-    makeBlocArguments() {
-        const color = this.utilsInst.getRandomElementFromArr(this.colors);
-        const width = this.utilsInst.randomMinMax(10, 150);
-        const height = this.utilsInst.randomMinMax(10, 100);
-        return { color, width, height };
     }
 
     /**

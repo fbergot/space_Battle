@@ -1,7 +1,7 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Soucoupe from "../ManagerSoucoupe/Soucoupe.js";
-import ManagerBloc from "../ManagerEnnemi/ManagerBlocs.js";
+import ManagerBloc from "../ManagerBloc/ManagerBlocs.js";
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
