@@ -1,6 +1,7 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
 import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
+import Speed from "../ManagerSpeed/Speed.js";
 
 class Bloc {
     /** @private {number} #x */
@@ -9,6 +10,7 @@ class Bloc {
     #y;
 
     constructor({ color, width, height }) {
+        this.speedInstance = new Speed();
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.color = color;
@@ -17,7 +19,7 @@ class Bloc {
         this.utils = utilsInstance;
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(0, 500);
-        this.managerPositionInstance = new ManagerPosition(this);
+        this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
     }
 
     /**

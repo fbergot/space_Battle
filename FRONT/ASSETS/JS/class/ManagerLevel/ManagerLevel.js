@@ -34,7 +34,6 @@ class ManagerLevel {
     }
 
     loadLevel(level) {
-        console.log(level);
         this.arrLevelsFunc[level](this.gameInstance);
     }
 }

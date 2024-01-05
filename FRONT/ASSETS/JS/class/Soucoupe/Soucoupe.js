@@ -1,6 +1,7 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
 import utilsInstance from "../UTILS/Utils.js";
+import Speed from "../ManagerSpeed/Speed.js";
 
 class Soucoupe {
     /** @private {number} #x */
@@ -9,8 +10,9 @@ class Soucoupe {
     #y;
 
     constructor() {
+        this.speedInstance = new Speed(6);
         this.utils = utilsInstance;
-        this.managerPositionInstance = new ManagerPosition(this);
+        this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
         this.image = null;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;

@@ -8,10 +8,10 @@ class Ennemi {
     /** @private {number} #y */
     #y;
 
-    constructor() {
+    constructor(speed) {
         this.utils = utilsInstance;
-        this.managerPositionInstance = new ManagerPosition(this);
-        this.managerPositionInstance.speed = this.utils.randomMinMax(2, 7);
+        this.managerPositionInstance = new ManagerPosition(this, speed);
+        this.managerPositionInstance.valueLevel = this.utils.randomMinMax(2, 7);
         this.image = this.utils.makeImage("ennemis", "soucoupe");
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
@@ -35,7 +35,7 @@ class Ennemi {
     }
 
     /**
-     *
+     * @param {[x: number, y: number]} coordinatesPlayer
      */
     update(coordinatesPlayer) {
         this.managerPositionInstance.updateCoordinatesAuto(coordinatesPlayer);

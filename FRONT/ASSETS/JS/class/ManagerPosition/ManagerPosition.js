@@ -9,14 +9,15 @@ class ManagerPosition {
     /** @private {string} #instanceToMoveDirection */
     #instanceToMoveDirection;
 
-    constructor(instanceToMove) {
+    constructor(instanceToMove, speedInstance) {
         this.currentInstance = instanceToMove;
         this.utils = utilsInstance;
-        this.speedInstancePlayer = new speed();
-        this.speedInstance = new speed();
+        this.speedInstance = speedInstance;
+        this.speed = this.speedInstance.levelSpeed;
+        // this.speedInstancePlayer = new speed();
+        // this.speedInstance = new speed();
 
-        this.speedPlayer = this.speedInstancePlayer.levelSpeed;
-        this.speedInstance.valueLevel = 4;
+        // this.speedInstance.valueLevel = 4;
         this.canvas = Canvas;
         this.utils.addEvListener("html", "keydown", (e) => this.changeDirection.call(this, e));
         this.valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
@@ -25,12 +26,13 @@ class ManagerPosition {
 
     /**
      * Change direction of #instanceToMoveDirection
-     * @param {Event} e
+     * @param {EventTarget} e
      */
     changeDirection(e) {
         /** @description {Si la dir est déjà celle que l'on frappe ou que la touche frappée n'est pas une dir, on ignore} */
-        if (!this.valuesDirections.includes(e.key) || this.#instanceToMoveDirection === e.key) return;
+        if (!this.valuesDirections.includes(e.key) || this.#instanceToMoveDirection == e.key) return;
         this.#instanceToMoveDirection = e.key;
+
         if (this.currentInstance instanceof Soucoupe) this.updateCoordinates();
     }
 
@@ -45,19 +47,19 @@ class ManagerPosition {
         if (this.#instanceToMoveDirection === "ArrowUp") {
             // prettier-ignore
             if (y <= 0 - (26.6 * this.canvas.canvasBox)) y = this.canvas.canvasHeight;
-            y -= this.speedPlayer;
+            y -= this.speed;
         } else if (this.#instanceToMoveDirection === "ArrowDown") {
             // prettier-ignore
             if (y >= this.canvas.canvasHeight) y = 0 - (26.6 * this.canvas.canvasBox);
-            y += this.speedPlayer;
+            y += this.speed;
         } else if (this.#instanceToMoveDirection === "ArrowLeft") {
             // prettier-ignore
             if (x <= 0 - (26.6 * this.canvas.canvasBox)) x = this.canvas.canvasWidth;
-            x -= this.speedPlayer;
+            x -= this.speed;
         } else if (this.#instanceToMoveDirection === "ArrowRight") {
             // prettier-ignore
             if (x >= this.canvas.canvasWidth) x = 0 - (26.6 * this.canvas.canvasBox);
-            x += this.speedPlayer;
+            x += this.speed;
         }
 
         /** @description {Ensuite on set les nouvelles coordonnées} */
@@ -90,22 +92,22 @@ class ManagerPosition {
      */
     updateCoordinatesAutoBlocs(thisArg, externalFunction) {
         if (this.currentInstance instanceof Bloc) {
-            let [x, y] = externalFunction(this.currentInstance.coordinates, 4);
+            let [x, y] = externalFunction(this.currentInstance.coordinates, this.speed);
 
             if (y <= 0 - 26.6 * this.canvas.canvasBox) y = this.canvas.canvasHeight;
-            y -= this.speedPlayer;
+            y -= this.speed;
 
             // prettier-ignore
             if (y >= this.canvas.canvasHeight) y = 0 - (26.6 * this.canvas.canvasBox);
-            y += this.speedPlayer;
+            y += this.speed;
 
             // prettier-ignore
             if (x <= 0 - (26.6 * this.canvas.canvasBox)) x = this.canvas.canvasWidth;
-            x -= this.speedPlayer;
+            x -= this.speed;
 
             // prettier-ignore
             if (x >= this.canvas.canvasWidth) x = 0 - (26.6 * this.canvas.canvasBox);
-            x += this.speedPlayer;
+            x += this.speed;
 
             thisArg.coordinates = [x, y];
         }
