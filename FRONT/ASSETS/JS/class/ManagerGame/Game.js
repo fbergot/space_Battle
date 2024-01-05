@@ -14,8 +14,8 @@ class Game {
         this.managerBlocInstance = new ManagerBloc();
         this.managerPositionInstance = new ManagerPositionInstance();
         this.soucoupeInstance = new Soucoupe();
-        // this.utils.$("#background").style.width = this.canvas.canvasWidth + "px";
-        // this.utils.$("#background").style.height = this.canvas.canvasHeight + "px";
+        this.utils.$("#background").style.width = this.canvas.canvasWidth + "px";
+        this.utils.$("#background").style.height = this.canvas.canvasHeight + "px";
         this.ennemisInstances = [];
     }
 

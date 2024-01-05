@@ -16,10 +16,14 @@ class Bloc {
         this.height = height;
         this.utils = utilsInstance;
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
-        this.#y = -120;
+        this.#y = this.utils.randomMinMax(0, 500);
         this.managerPositionInstance = new ManagerPosition(this);
     }
 
+    /**
+     * Upadte la position des blocs
+     * @param {([x: number, y: number], number) => [x: number, y: number]} externalFunction
+     */
     update(externalFunction) {
         this.managerPositionInstance.updateCoordinatesAutoBlocs(this, externalFunction);
         this.draw();

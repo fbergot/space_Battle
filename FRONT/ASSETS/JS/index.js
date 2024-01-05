@@ -8,17 +8,23 @@ const canvasInstance = Canvas;
 const managerLevelInstance = new ManagerLevel(gameInstance);
 const utilsInstance = UTILS;
 
+/**
+ * Fonction génératrice (gère les levels du jeu)
+ * @param {number} i
+ */
 function* levelMove(i) {
-    yield managerLevelInstance.loadLevel(0);
-    yield managerLevelInstance.loadLevel(1);
-    yield managerLevelInstance.loadLevel(2);
-    yield managerLevelInstance.loadLevel(3);
+    yield managerLevelInstance.loadLevel(i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
 }
 
-export const iterator = levelMove(0);
+export const generator = levelMove(0);
 
 utilsInstance.addEvListener("#addEnnemis", "click", () => {
-    iterator.next();
+    generator.next();
 });
 
 const audio = document.querySelector("#audio1");

@@ -7,6 +7,14 @@ class ManagerLevel {
         this.gameInstance = gameInstance;
         this.arrLevelsFunc = [
             (gameInstance) => {
+                gameInstance.init(5);
+                gameInstance.renderLoop({ bloc: true, ennemi: false });
+            },
+            (gameInstance) => {
+                this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
+                gameInstance.stopRenderLoop();
+            },
+            (gameInstance) => {
                 gameInstance.init(10);
                 gameInstance.renderLoop({ bloc: true, ennemi: false });
             },
