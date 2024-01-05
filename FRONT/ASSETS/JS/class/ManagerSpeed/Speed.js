@@ -7,11 +7,15 @@ class Speed {
     /** @private {number} #speed */
     #speed;
 
+    /**
+     * @constructor
+     * @param {number} level
+     */
     constructor(level) {
         this.utils = utilsInstance;
         this.canvas = Canvas;
         this.canvasBox = this.canvas.canvasBox;
-        this.#level = level ? level : this.utils.randomMinMax(1, 5);
+        this.#level = level ? level : this.utils.randomMinMax(1, 2);
         this.setSpeed = () => (this.#speed = this.#level * this.canvasBox);
         this.#speed = this.setSpeed();
     }
@@ -19,7 +23,6 @@ class Speed {
     /**
      * Change level of speed
      * @param {number} level
-     * @memberof Speed
      */
     set valueLevel(level) {
         const errorStr = `Le level doit être un nombre. given: ${typeof level}`;

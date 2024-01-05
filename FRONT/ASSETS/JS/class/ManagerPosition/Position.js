@@ -1,23 +1,24 @@
 import utilsInstance from "../UTILS/Utils.js";
-import speed from "../../../JS/class/ManagerSpeed/Speed.js";
-import Canvas from "../../../JS/class/ManagerCanvas/Canvas.js";
-import ManagerBloc from "../Ennemis/ManagerBlocs.js";
-import Soucoupe from "../Soucoupe/Soucoupe.js";
-import Bloc from "../Ennemis/Bloc.js";
+import Canvas from "../ManagerCanvas/Canvas.js";
+import Soucoupe from "../ManagerSoucoupe/Soucoupe.js";
+import Bloc from "../ManagerEnnemi/Bloc.js";
+import Ennemi from "../ManagerEnnemi/Ennemi.js";
+import Speed from "../ManagerSpeed/Speed.js";
 
 class ManagerPosition {
     /** @private {string} #instanceToMoveDirection */
     #instanceToMoveDirection;
 
+    /**
+     * @constructor
+     * @param { Bloc | Soucoupe | Ennemi} instanceToMove
+     * @param {Speed} speedInstance
+     */
     constructor(instanceToMove, speedInstance) {
         this.currentInstance = instanceToMove;
         this.utils = utilsInstance;
         this.speedInstance = speedInstance;
         this.speed = this.speedInstance.levelSpeed;
-        // this.speedInstancePlayer = new speed();
-        // this.speedInstance = new speed();
-
-        // this.speedInstance.valueLevel = 4;
         this.canvas = Canvas;
         this.utils.addEvListener("html", "keydown", (e) => this.changeDirection.call(this, e));
         this.valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
@@ -25,7 +26,7 @@ class ManagerPosition {
     }
 
     /**
-     * Change direction of #instanceToMoveDirection
+     * @description Change direction of #instanceToMoveDirection
      * @param {EventTarget} e
      */
     changeDirection(e) {
@@ -38,10 +39,9 @@ class ManagerPosition {
 
     /**
      * UPDATE LES COORDs of #instanceToMoveDirection
+     * @description {On vient get les points X, Y de l'instance injecté dans le constructor}
      */
     updateCoordinates() {
-        /** @description {On vient get les points X, Y de l'instance injecté dans le constructor} */
-        console.log(this.currentInstance);
         let [x, y] = this.currentInstance.coordinates;
 
         if (this.#instanceToMoveDirection === "ArrowUp") {

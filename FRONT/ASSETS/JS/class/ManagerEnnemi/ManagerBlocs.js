@@ -1,12 +1,13 @@
-import Canvas from "../ManagerCanvas/Canvas.js";
-
 import utilsInstance from "../UTILS/Utils.js";
-import Bloc from "../Ennemis/Bloc.js";
+import Bloc from "./Bloc.js";
 
 class ManagerBloc {
     /** @type { Bloc[] } allBlocsInstances */
     #allBlocsInstances = [];
 
+    /**
+     * @constructor
+     */
     constructor() {
         this.Bloc = Bloc;
         this.colors = ["#FFF", "#ADF", "blue"];
@@ -22,7 +23,6 @@ class ManagerBloc {
     }
 
     /**
-     *
      * @param {number} nbOfInstances
      */
     blocsGeneration(nbOfInstances) {
@@ -47,8 +47,8 @@ class ManagerBloc {
      */
     makeBlocArguments() {
         const color = this.utilsInst.getRandomElementFromArr(this.colors);
-        const width = this.utilsInst.randomMinMax(20, 200);
-        const height = this.utilsInst.randomMinMax(20, 200);
+        const width = this.utilsInst.randomMinMax(10, 150);
+        const height = this.utilsInst.randomMinMax(10, 100);
         return { color, width, height };
     }
 
@@ -60,7 +60,7 @@ class ManagerBloc {
      */
     mouvementsBlocsBasic([x, y], speed) {
         y += speed;
-        x -= speed / 2;
+        x -= speed;
         return [x, y];
     }
 
@@ -70,7 +70,7 @@ class ManagerBloc {
     updateBlocs() {
         this.#allBlocsInstances.forEach((blocInstance) => {
             blocInstance.update(this.mouvementsBlocsBasic);
-        });
+        }, this);
     }
 }
 

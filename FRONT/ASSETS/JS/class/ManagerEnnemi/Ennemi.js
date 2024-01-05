@@ -1,5 +1,5 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
-import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
+import ManagerPosition from "../ManagerPosition/Position.js";
 import utilsInstance from "../UTILS/Utils.js";
 
 class Ennemi {
@@ -8,6 +8,10 @@ class Ennemi {
     /** @private {number} #y */
     #y;
 
+    /**
+     * @constructor
+     * @param {number} speed
+     */
     constructor(speed) {
         this.utils = utilsInstance;
         this.managerPositionInstance = new ManagerPosition(this, speed);
@@ -44,7 +48,7 @@ class Ennemi {
 
     /** Function for draw the image on the canvas */
     draw() {
-        return this.ctx.drawImage(this.image, this.#x, this.#y);
+        this.ctx.drawImage(this.image, this.#x, this.#y);
     }
 }
 

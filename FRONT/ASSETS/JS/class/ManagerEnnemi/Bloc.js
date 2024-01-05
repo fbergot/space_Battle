@@ -1,6 +1,6 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
-import ManagerPosition from "../ManagerPosition/ManagerPosition.js";
+import ManagerPosition from "../ManagerPosition/Position.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
 class Bloc {
@@ -9,8 +9,12 @@ class Bloc {
     /** @private {number} #y */
     #y;
 
+    /**
+     * @constructor
+     * @param {{color: string, width: number, height: number}} param0
+     */
     constructor({ color, width, height }) {
-        this.speedInstance = new Speed();
+        this.speedInstance = new Speed(1);
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.color = color;

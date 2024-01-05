@@ -1,12 +1,14 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
-import Soucoupe from "../Soucoupe/Soucoupe.js";
-import ManagerPositionInstance from "../ManagerPosition/ManagerPosition.js";
-import ManagerBloc from "../Ennemis/ManagerBlocs.js";
-import Ennemi from "../Ennemis/Ennemi.js";
+import Soucoupe from "../ManagerSoucoupe/Soucoupe.js";
+import ManagerBloc from "../ManagerEnnemi/ManagerBlocs.js";
+import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
 class Game {
+    /**
+     * @constructor
+     */
     constructor() {
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;

@@ -1,4 +1,7 @@
 class Utils {
+    /**
+     * @constructor
+     */
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
         this.$$ = (selector) => document.querySelectorAll(selector);
