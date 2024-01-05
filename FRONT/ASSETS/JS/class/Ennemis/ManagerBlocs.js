@@ -44,7 +44,12 @@ class ManagerBloc {
         const height = this.utilsInst.randomMinMax(50, 200);
         return { color, width, height };
     }
-
+    /**
+     * Ajoute les limites
+     * @param {[x: number, y: number]} param0
+     * @param {number} speed
+     * @returns {[x: number, y: number]}
+     */
     mouvementsBlocsBasic([x, y], speed) {
         y += speed;
         x -= speed / 2;
@@ -52,7 +57,6 @@ class ManagerBloc {
     }
 
     updateBlocs() {
-        console.log(this.#allBlocsInstances);
         this.#allBlocsInstances.forEach((blocInstance) => {
             blocInstance.update(this.mouvementsBlocsBasic);
         });

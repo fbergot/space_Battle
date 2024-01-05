@@ -3,37 +3,48 @@ import utilsInstance from "../UTILS/Utils.js";
 import Soucoupe from "../Soucoupe/Soucoupe.js";
 import ManagerPositionInstance from "../ManagerPosition/ManagerPosition.js";
 import ManagerBloc from "../Ennemis/ManagerBlocs.js";
+import Ennemi from "../Ennemis/Ennemi.js";
 
 class Game {
     constructor() {
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
-        this.timer = null;
+        this.idTimer = null;
         this.utils = utilsInstance;
         this.managerBlocInstance = new ManagerBloc();
         this.managerPositionInstance = new ManagerPositionInstance();
         this.soucoupeInstance = new Soucoupe();
         // this.utils.$("#background").style.width = this.canvas.canvasWidth + "px";
         // this.utils.$("#background").style.height = this.canvas.canvasHeight + "px";
+        this.ennemisInstances = [];
     }
 
     init(nbOfInstances) {
         this.managerBlocInstance.blocsGeneration(nbOfInstances);
     }
 
-    renderLoop(loopTime = 100) {
-        const draw = () => {
-            this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
-            this.managerBlocInstance.updateBlocs();
-            this.soucoupeInstance.update();
+    initEnnemis(nbOfInstances) {
+        for (let i = 1; i <= nbOfInstances; i++) {
+            const ennemi = new Ennemi();
+            this.ennemisInstances.push(ennemi);
+        }
+    }
 
-            // console.log(this.allBlocs);
+    stopRenderLoop() {
+        cancelAnimationFrame(this.idTimer);
+    }
 
-            if (!this.timer) {
-                this.timer = setTimeout(draw, loopTime);
-            } else setTimeout(draw, loopTime);
-        };
-        draw();
+    renderLoop({ bloc, ennemi }) {
+        this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
+        if (bloc) this.managerBlocInstance.updateBlocs();
+        if (ennemi)
+            this.ennemisInstances.forEach((instanceEnnemi) =>
+                instanceEnnemi.update(this.soucoupeInstance.coordinates)
+            );
+
+        this.soucoupeInstance.update();
+
+        this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, { bloc, ennemi }));
     }
 }
 

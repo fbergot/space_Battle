@@ -9,7 +9,7 @@ class Speed {
     constructor() {
         this.canvas = Canvas;
         this.canvasBox = this.canvas.canvasBox;
-        this.#level = 5;
+        this.#level = 2;
         this.setSpeed = () => (this.#speed = this.#level * this.canvasBox);
         this.#speed = this.setSpeed();
     }
