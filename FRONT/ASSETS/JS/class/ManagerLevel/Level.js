@@ -28,7 +28,7 @@ class ManagerLevel {
                 gameInstance.stopRenderLoop();
             },
             (gameInstance) => {
-                gameInstance.initEnnemis(5);
+                gameInstance.initEnnemis(3);
                 gameInstance.renderLoop({ bloc: false, ennemi: true });
             },
             (gameInstance) => {

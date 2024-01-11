@@ -14,7 +14,7 @@ class Canvas {
         this.ratioHeight = window.innerHeight > pxTrigger ? 0.7 : 0.8;
         this.canvasWidth = window.innerWidth * this.ratioWidth;
         this.canvasHeight = window.innerHeight * this.ratioHeight;
-        this.canvasBox = window.innerWidth > pxTrigger ? 3 : 2;
+        this.canvasBox = window.innerWidth > pxTrigger ? 2.5 : 1.5;
         this.#canvas.width = Math.floor(this.canvasWidth / this.canvasBox) * this.canvasBox;
         this.#canvas.height = Math.floor(this.canvasHeight / this.canvasBox) * this.canvasBox;
         this.contentCanvas.appendChild(this.#canvas);

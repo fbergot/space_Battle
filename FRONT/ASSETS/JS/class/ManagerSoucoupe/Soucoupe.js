@@ -10,16 +10,29 @@ class Soucoupe {
     #y;
 
     constructor() {
-        this.speedInstance = new Speed(2);
+        this.speedInstance = new Speed();
+        this.speedInstance.valueLevel = 4;
         this.utils = utilsInstance;
         this.PositionInstance = new Position(this, this.speedInstance);
         this.image = null;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
+        this.width;
+        this.height;
+        this.widthAndHeightDic = {
+            UpDown: [70, 100],
+            LeftRight: [100, 70],
+        };
         this.#x = this.utils.randomMinMax(1, this.canvas.canvasWidth - 26.6);
         this.#y = this.utils.randomMinMax(1, this.canvas.canvasHeight - 26.6);
     }
 
+    /**
+     * @returns {[x: number, y: number]}
+     */
+    get widthAndHeight() {
+        return [this.width, this.height];
+    }
     /**
      * @returns {[x: number, y: number]}
      */
@@ -42,6 +55,10 @@ class Soucoupe {
         const direction = this.PositionInstance.instanceToMoveDirection;
         const imgName = `player_${direction.replace("Arrow", "").toUpperCase()}`;
         this.image = this.utils.makeImage("player", imgName);
+        [this.width, this.height] = ["ArrowLeft", "ArrowRight"].includes(direction)
+            ? this.widthAndHeightDic.LeftRight
+            : this.widthAndHeightDic.UpDown;
+        // console.log([this.width, this.height]);
         this.draw();
     }
 
@@ -49,13 +66,7 @@ class Soucoupe {
      * Draw the image on the canvas
      */
     draw() {
-        this.ctx.drawImage(
-            this.image,
-            this.#x,
-            this.#y,
-            26.6 * this.canvas.canvasBox,
-            26.6 * this.canvas.canvasBox
-        );
+        this.ctx.drawImage(this.image, this.#x, this.#y, this.width, this.height);
     }
 }
 

@@ -9,21 +9,29 @@ class Ennemi {
     /** @private {number} #y */
     #y;
 
-    /**
-     * @constructor
-     * @param {number} speed
-     */
     constructor() {
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
+        this.speedInstance.valueLevel = this.utils.randomMinMax(0.2, 2.5);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
-        this.speedInstance.valueLevel = this.utils.randomMinMax(1, 4);
         this.image = this.utils.makeImage("ennemis", "soucoupe");
+        this.widthAndHeight = [100, 54];
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
-        this.#y = this.utils.randomMinMax(-10, this.canvas.canvasHeight);
-        this.nbInstance = 0;
+        this.#y = this.utils.randomMinMax(-10, -200);
+    }
+
+    /**
+     * @returns {{ x: number, y: number, xMax: number, yMax: number }}
+     */
+    get coordinatesWithWidthAndHeight() {
+        return {
+            xEnn: this.#x,
+            yEnn: this.#y,
+            xEnnMax: this.#x + this.widthAndHeight[0],
+            yEnnMax: this.#y + this.widthAndHeight[1],
+        };
     }
 
     /**

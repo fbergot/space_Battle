@@ -13,9 +13,9 @@ class Utils {
     }
 
     /**
-     * @param {number} min min of gap
-     * @param {number} max max of gap
-     * @return {number} number random in the gap
+     * @param {number} min min of range
+     * @param {number} max max of range
+     * @return {number} integer random in the range
      */
     randomMinMax(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);

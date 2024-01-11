@@ -2,11 +2,13 @@ import utilsInstance from "../UTILS/Utils.js";
 import Bloc from "./Bloc.js";
 
 class ManagerBloc {
-    /** @type { Bloc[] } allBlocsInstances */
+    /**
+     * @type { Bloc[] } allBlocsInstances
+     * @private
+     */
     #allBlocsInstances = [];
 
     constructor() {
-        this.Bloc = Bloc;
         this.utilsInst = utilsInstance;
         this.#allBlocsInstances = [];
     }
@@ -14,7 +16,7 @@ class ManagerBloc {
     /**
      * @returns { Bloc[] }
      */
-    get blocInstances() {
+    get instances() {
         return this.#allBlocsInstances;
     }
 
@@ -26,19 +28,18 @@ class ManagerBloc {
     }
 
     /**
+     * Génère les blocs
      * @param {number} nbOfInstances
      */
     blocsGeneration(nbOfInstances) {
-        let blocInstance = null;
         /**
-         * @param {number} nbIteration
+         * @param {number} nbIterations
          * @returns {void}
          */
-        const loopRecursive = (nbIteration) => {
-            if (nbIteration < nbOfInstances) {
-                blocInstance = new Bloc();
-                this.#allBlocsInstances.push(blocInstance);
-                loopRecursive(++nbIteration);
+        const loopRecursive = (nbIterations) => {
+            if (nbIterations < nbOfInstances) {
+                this.#allBlocsInstances.push(new Bloc());
+                loopRecursive(++nbIterations);
             }
             return;
         };

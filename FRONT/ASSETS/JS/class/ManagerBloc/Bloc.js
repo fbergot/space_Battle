@@ -19,6 +19,7 @@ class Bloc {
         this.color = this.utils.getRandomElementFromArr(this.colors);
         this.width = this.utils.randomMinMax(100, 150);
         this.height = this.utils.randomMinMax(100, 150);
+        this.widthAndHeight = [this.width, this.height];
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(0, 500);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
@@ -43,6 +44,18 @@ class Bloc {
     }
 
     /**
+     * @returns {{ x: number, y: number, xMax: number, yMax: number }}
+     */
+    get coordinatesWithWidthAndHeight() {
+        return {
+            xEnn: this.#x,
+            yEnn: this.#y,
+            xEnnMax: this.#x + this.widthAndHeight[0],
+            yEnnMax: this.#y + this.widthAndHeight[1],
+        };
+    }
+
+    /**
      * @returns {[x: number, y: number]}
      */
     get coordinates() {
@@ -56,12 +69,12 @@ class Bloc {
         [this.#x, this.#y] = coordinatesXY;
     }
 
-    /**
-     * @param {[width: string, height: string]} newValues
-     */
-    set setWidthAndHeight(newValues) {
-        [this.width, this.height] = newValues;
-    }
+    // /**
+    //  * @param {[width: string, height: string]} newValues
+    //  */
+    // set setWidthAndHeight(newValues) {
+    //     [this.width, this.height] = newValues;
+    // }
 }
 
 export default Bloc;

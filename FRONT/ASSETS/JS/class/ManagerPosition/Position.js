@@ -22,7 +22,9 @@ class ManagerPosition {
         this.canvas = Canvas;
         this.utils.addEvListener("html", "keydown", (e) => this.changeDirection.call(this, e));
         this.valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-        this.#instanceToMoveDirection = this.utils.getRandomElementFromArr(this.valuesDirections);
+        this.#instanceToMoveDirection = this.utils.getRandomElementFromArr(
+            this.valuesDirections.filter((_, index) => index < 2)
+        );
     }
 
     /**
@@ -71,6 +73,8 @@ class ManagerPosition {
      * @param {[x: number, y: number]} coordinatesPlayer
      */
     updateCoordinatesAuto(coordinatesPlayer) {
+        if (!this.currentInstance instanceof Ennemi) return;
+
         /** @description {On vient get les points X, Y de l'instance injecté dans le constructor + ceux du player} */
         let [x, y] = this.currentInstance.coordinates;
         const [xPlayer, yPlayer] = coordinatesPlayer;
@@ -91,26 +95,25 @@ class ManagerPosition {
      * @param {(x: number, y: number) => [x: number, y: number]} externalFunction
      */
     updateCoordinatesAutoBlocs(thisArg, externalFunction) {
-        if (this.currentInstance instanceof Bloc) {
-            let [x, y] = externalFunction(this.currentInstance.coordinates, this.speed);
+        if (!this.currentInstance instanceof Bloc) return;
+        let [x, y] = externalFunction(this.currentInstance.coordinates, this.speed);
 
-            if (y <= 0 - 26.6 * this.canvas.canvasBox) y = this.canvas.canvasHeight;
-            y -= this.speed;
+        if (y <= 0 - 26.6 * this.canvas.canvasBox) y = this.canvas.canvasHeight;
+        y -= this.speed;
 
-            // prettier-ignore
-            if (y >= this.canvas.canvasHeight) y = 0 - (26.6 * this.canvas.canvasBox);
-            y += this.speed;
+        // prettier-ignore
+        if (y >= this.canvas.canvasHeight) y = 0 - (26.6 * this.canvas.canvasBox);
+        y += this.speed;
 
-            // prettier-ignore
-            if (x <= 0 - (26.6 * this.canvas.canvasBox)) x = this.canvas.canvasWidth;
-            x -= this.speed;
+        // prettier-ignore
+        if (x <= 0 - (26.6 * this.canvas.canvasBox)) x = this.canvas.canvasWidth;
+        x -= this.speed;
 
-            // prettier-ignore
-            if (x >= this.canvas.canvasWidth) x = 0 - (26.6 * this.canvas.canvasBox);
-            x += this.speed;
+        // prettier-ignore
+        if (x >= this.canvas.canvasWidth) x = 0 - (26.6 * this.canvas.canvasBox);
+        x += this.speed;
 
-            thisArg.coordinates = [x, y];
-        }
+        thisArg.coordinates = [x, y];
     }
 
     /**

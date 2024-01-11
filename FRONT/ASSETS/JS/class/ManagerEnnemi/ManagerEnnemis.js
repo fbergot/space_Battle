@@ -1,7 +1,10 @@
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
 
 class ManagerEnnemis {
-    /** @type { Ennemi[] } allEnnemisInstances */
+    /**
+     * @type { Ennemi[] } allEnnemisInstances
+     * @private
+     */
     #allEnnemisInstances;
 
     constructor() {
@@ -11,7 +14,7 @@ class ManagerEnnemis {
     /**
      * @returns { Ennemi[] }
      */
-    get ennemisInstances() {
+    get instances() {
         return this.#allEnnemisInstances;
     }
 
@@ -23,19 +26,18 @@ class ManagerEnnemis {
     }
 
     /**
+     * Génère les ennemis
      * @param {number} nbOfInstances
      */
     ennemisGeneration(nbOfInstances) {
-        let ennemisInstance = null;
         /**
-         * @param {number} nbIteration
+         * @param {number} nbIterations
          * @returns {void}
          */
-        const loopRecursive = (nbIteration) => {
-            if (nbIteration < nbOfInstances) {
-                ennemisInstance = new Ennemi();
-                this.#allEnnemisInstances.push(ennemisInstance);
-                loopRecursive(++nbIteration);
+        const loopRecursive = (nbIterations) => {
+            if (nbIterations < nbOfInstances) {
+                this.#allEnnemisInstances.push(new Ennemi());
+                loopRecursive(++nbIterations);
             }
             return;
         };
@@ -43,7 +45,8 @@ class ManagerEnnemis {
     }
 
     /**
-     * Gère le move des blocs
+     * Gère le move des ennemis
+     * @param {[x: number, y: number]} coordinatesPlayer
      */
     updateEnnemis(coordinatesPlayer) {
         this.#allEnnemisInstances.forEach((ennemiInstance) => {

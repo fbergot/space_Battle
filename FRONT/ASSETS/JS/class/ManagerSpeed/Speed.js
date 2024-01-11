@@ -15,8 +15,8 @@ class Speed {
         this.utils = utilsInstance;
         this.canvas = Canvas;
         this.canvasBox = this.canvas.canvasBox;
-        this.#level = level ? level : this.utils.randomMinMax(1, 2);
-        this.setSpeed = () => (this.#speed = this.#level * this.canvasBox);
+        this.#level = level ? level : this.utils.randomMinMax(0.1, 1.9);
+        this.setSpeed = () => (this.#speed = this.#level);
         this.#speed = this.setSpeed();
     }
 
