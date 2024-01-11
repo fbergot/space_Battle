@@ -4,27 +4,27 @@ import Soucoupe from "../ManagerSoucoupe/Soucoupe.js";
 import ManagerBloc from "../ManagerBloc/ManagerBlocs.js";
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import Speed from "../ManagerSpeed/Speed.js";
+import Collision from "../ManagerCollision/Collision.js";
+import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
 
 class Game {
-    /**
-     * @constructor
-     */
     constructor() {
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.idTimer = null;
         this.utils = utilsInstance;
         this.managerBlocInstance = new ManagerBloc();
+        this.managerEnnemisInstance = new ManagerEnnemis();
+        this.managerCollisionInstance = new Collision(this.managerBlocInstance);
         this.soucoupeInstance = new Soucoupe();
         this.utils.$("#background").style.width = this.canvas.canvasWidth + "px";
         this.utils.$("#background").style.height = this.canvas.canvasHeight + "px";
-        this.ennemisInstances = [];
     }
 
     /**
      * @param {number} nbOfInstances
      */
-    init(nbOfInstances) {
+    initBlocs(nbOfInstances) {
         this.managerBlocInstance.blocsGeneration(nbOfInstances);
     }
 
@@ -32,17 +32,16 @@ class Game {
      * @param {number} nbOfInstances
      */
     initEnnemis(nbOfInstances) {
-        for (let i = 1; i <= nbOfInstances; i++) {
-            const ennemi = new Ennemi(new Speed());
-            this.ennemisInstances.push(ennemi);
-        }
+        this.managerEnnemisInstance.ennemisGeneration(nbOfInstances);
     }
 
     /**
-     * Coupe la boucle de jeu
+     * Stop la boucle récursive du jeu et réinit les data du jeu (ennemis & blocs)
      */
     stopRenderLoop() {
         window.cancelAnimationFrame(this.idTimer);
+        this.managerBlocInstance.blocInstancesReInit();
+        this.managerEnnemisInstance.ennemisInstancesReInit();
     }
 
     /**
@@ -52,10 +51,7 @@ class Game {
     renderLoop({ bloc, ennemi }) {
         this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
         if (bloc) this.managerBlocInstance.updateBlocs();
-        if (ennemi)
-            this.ennemisInstances.forEach((instanceEnnemi) =>
-                instanceEnnemi.update(this.soucoupeInstance.coordinates)
-            );
+        if (ennemi) this.managerEnnemisInstance.updateEnnemis(this.soucoupeInstance.coordinates);
 
         this.soucoupeInstance.update();
 

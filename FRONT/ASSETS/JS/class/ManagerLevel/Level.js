@@ -12,7 +12,7 @@ class ManagerLevel {
         this.gameInstance = gameInstance;
         this.arrLevelsFunc = [
             (gameInstance) => {
-                gameInstance.init(4);
+                gameInstance.initBlocs(4);
                 gameInstance.renderLoop({ bloc: true, ennemi: false });
             },
             (gameInstance) => {
@@ -20,7 +20,7 @@ class ManagerLevel {
                 gameInstance.stopRenderLoop();
             },
             (gameInstance) => {
-                gameInstance.init(8);
+                gameInstance.initBlocs(8);
                 gameInstance.renderLoop({ bloc: true, ennemi: false });
             },
             (gameInstance) => {

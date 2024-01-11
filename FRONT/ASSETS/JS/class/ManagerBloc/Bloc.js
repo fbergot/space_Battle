@@ -9,9 +9,6 @@ class Bloc {
     /** @private {number} #y */
     #y;
 
-    /**
-     * @constructor
-     */
     constructor() {
         this.colors = ["#FFF", "#ADF", "blue", "#AAF", "#FFF", "red"];
         this.utils = utilsInstance;

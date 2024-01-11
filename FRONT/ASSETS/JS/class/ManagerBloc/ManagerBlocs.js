@@ -5,9 +5,6 @@ class ManagerBloc {
     /** @type { Bloc[] } allBlocsInstances */
     #allBlocsInstances = [];
 
-    /**
-     * @constructor
-     */
     constructor() {
         this.Bloc = Bloc;
         this.utilsInst = utilsInstance;
@@ -19,6 +16,13 @@ class ManagerBloc {
      */
     get blocInstances() {
         return this.#allBlocsInstances;
+    }
+
+    /**
+     * Reinit le array des instances
+     */
+    blocInstancesReInit() {
+        this.#allBlocsInstances = [];
     }
 
     /**
@@ -34,7 +38,7 @@ class ManagerBloc {
             if (nbIteration < nbOfInstances) {
                 blocInstance = new Bloc();
                 this.#allBlocsInstances.push(blocInstance);
-                loopRecursive(nbIteration + 1);
+                loopRecursive(++nbIteration);
             }
             return;
         };

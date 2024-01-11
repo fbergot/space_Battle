@@ -9,9 +9,6 @@ class Soucoupe {
     /** @private {number} #y */
     #y;
 
-    /**
-     * @constructor
-     */
     constructor() {
         this.speedInstance = new Speed(2);
         this.utils = utilsInstance;

@@ -1,7 +1,4 @@
 class Utils {
-    /**
-     * @constructor
-     */
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
         this.$$ = (selector) => document.querySelectorAll(selector);
@@ -57,10 +54,7 @@ class Utils {
             },
         };
 
-        if (type) {
-            return dictioPaths[typeOfgroup][type] || null;
-        }
-
+        if (type) return dictioPaths[typeOfgroup][type] || null;
         return dictioPaths[typeOfgroup] || null;
     }
 
