@@ -1,3 +1,5 @@
+import { levelChoice } from "../../config/levelsData.js";
+
 class Utils {
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
@@ -70,6 +72,17 @@ class Utils {
         image.src = src;
 
         return image;
+    }
+
+    /**
+     * @param {number} index
+     */
+    makeTimerGame(index) {
+        this.$("#time").innerText = levelChoice(index).levelTime;
+        this.idSetInterval = window.setInterval(() => {
+            this.$("#time").innerText = parseInt(this.$("#time").innerText) - 1000;
+            if (parseInt(this.$("#time").innerText) - 1000 === 0) window.clearInterval(this.idSetInterval);
+        }, 1000);
     }
 }
 

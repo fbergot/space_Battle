@@ -44,7 +44,7 @@ class Bloc {
     }
 
     /**
-     * @returns {{ x: number, y: number, xMax: number, yMax: number }}
+     * @returns {{ xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }}
      */
     get coordinatesWithWidthAndHeight() {
         return {
@@ -68,13 +68,6 @@ class Bloc {
     set coordinates(coordinatesXY) {
         [this.#x, this.#y] = coordinatesXY;
     }
-
-    // /**
-    //  * @param {[width: string, height: string]} newValues
-    //  */
-    // set setWidthAndHeight(newValues) {
-    //     [this.width, this.height] = newValues;
-    // }
 }
 
 export default Bloc;

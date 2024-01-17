@@ -18,7 +18,7 @@ class Collision {
                 ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
                 ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
             )
-                console.log({ xEnn, yEnn, xEnnMax, yEnnMax }, { x, y, xMax, yMax });
+                console.log("");
         });
     }
 }

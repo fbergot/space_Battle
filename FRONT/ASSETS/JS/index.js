@@ -1,9 +1,9 @@
 import Game from "./class/ManagerGame/Game.js";
 import UTILS from "./class/UTILS/Utils.js";
 import ManagerLevel from "./class/ManagerLevel/Level.js";
+import { levelChoice } from "./config/levelsData.js";
 
 const gameInstance = new Game();
-const managerLevelInstance = new ManagerLevel(gameInstance);
 const utilsInstance = UTILS;
 
 /**
@@ -12,15 +12,44 @@ const utilsInstance = UTILS;
  * @param {number} i
  */
 function* levelMove(i) {
-    yield managerLevelInstance.loadLevel(i);
-    yield managerLevelInstance.loadLevel(++i);
-    yield managerLevelInstance.loadLevel(++i);
-    yield managerLevelInstance.loadLevel(++i);
-    yield managerLevelInstance.loadLevel(++i);
-    yield managerLevelInstance.loadLevel(++i);
+    yield (() => {
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
+
+    yield (() => {
+        i++;
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
+
+    yield (() => {
+        i++;
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
+
+    yield (() => {
+        i++;
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
+
+    yield (() => {
+        i++;
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
+
+    yield (() => {
+        i++;
+        managerLevelInstance.loadLevel(i);
+        utilsInstance.makeTimerGame(i);
+    })();
 }
 
-export const generator = levelMove(0);
+const generator = levelMove(0);
+const managerLevelInstance = new ManagerLevel(gameInstance, generator);
 
 utilsInstance.addEvListener("#addEnnemis", "click", () => {
     generator.next();

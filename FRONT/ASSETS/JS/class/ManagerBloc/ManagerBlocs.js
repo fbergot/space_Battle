@@ -31,7 +31,7 @@ class ManagerBloc {
      * Génère les blocs
      * @param {number} nbOfInstances
      */
-    blocsGeneration(nbOfInstances) {
+    generation(nbOfInstances) {
         /**
          * @param {number} nbIterations
          * @returns {void}

@@ -29,7 +29,7 @@ class ManagerEnnemis {
      * Génère les ennemis
      * @param {number} nbOfInstances
      */
-    ennemisGeneration(nbOfInstances) {
+    generation(nbOfInstances) {
         /**
          * @param {number} nbIterations
          * @returns {void}
