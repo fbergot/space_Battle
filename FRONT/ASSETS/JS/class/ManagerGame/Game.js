@@ -48,45 +48,31 @@ class Game {
     }
 
     /**
-     *
-     * @param {[x: number, y: number]} param0
-     * @returns
-     */
-    getCoordinatesPlayer([x, y]) {
-        return {
-            x,
-            y,
-            xMax: x + this.soucoupeInstance.width,
-            yMax: y + this.soucoupeInstance.height,
-        };
-    }
-
-    /**
      * Boucle recursive du jeu
      * @param {{ bloc: boolean, ennemi: boolean }} param0
      */
-    renderLoop({ bloc, ennemi }) {
+    renderLoop(typeEnnemis) {
         this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
 
-        if (bloc) {
+        if (typeEnnemis === "blocs") {
             this.managerBlocInstance.updateBlocs();
             this.managerCollisionInstance.checkIfCollision(
-                this.getCoordinatesPlayer(this.soucoupeInstance.coordinates),
+                this.soucoupeInstance.newCoordinatesPlayer,
                 "managerBlocInstance"
             );
         }
 
-        if (ennemi) {
+        if (typeEnnemis === "soucoupe") {
             this.managerEnnemisInstance.updateEnnemis(this.soucoupeInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
-                this.getCoordinatesPlayer(this.soucoupeInstance.coordinates),
+                this.soucoupeInstance.newCoordinatesPlayer,
                 "managerEnnemisInstance"
             );
         }
 
         this.soucoupeInstance.update();
 
-        this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, { bloc, ennemi }));
+        this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, typeEnnemis));
     }
 }
 

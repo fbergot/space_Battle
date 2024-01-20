@@ -28,6 +28,18 @@ class Soucoupe {
     }
 
     /**
+     * @returns
+     */
+    get newCoordinatesPlayer() {
+        return {
+            x: this.#x,
+            y: this.#y,
+            xMax: this.#x + this.width,
+            yMax: this.#y + this.height,
+        };
+    }
+
+    /**
      * @returns {[x: number, y: number]}
      */
     get widthAndHeight() {
@@ -48,7 +60,7 @@ class Soucoupe {
     }
 
     /**
-     * Update positions and draw on Canvas.
+     * Update position and draw on canvas player
      */
     update() {
         this.PositionInstance.updateCoordinates();

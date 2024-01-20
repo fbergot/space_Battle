@@ -19,7 +19,7 @@ class ManagerLevel {
         this.arrLevelsFunc = [
             (gameInstance, index) => {
                 gameInstance.initBlocs(this.levelChoice(index).ennemis.nb);
-                gameInstance.renderLoop({ bloc: true, ennemi: false });
+                gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
                 this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
@@ -29,7 +29,7 @@ class ManagerLevel {
             },
             (gameInstance, index) => {
                 gameInstance.initBlocs(this.levelChoice(index).ennemis.nb);
-                gameInstance.renderLoop({ bloc: true, ennemi: false });
+                gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
                 this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
@@ -39,7 +39,7 @@ class ManagerLevel {
             },
             (gameInstance, index) => {
                 gameInstance.initEnnemis(this.levelChoice(index).ennemis.nb);
-                gameInstance.renderLoop({ bloc: false, ennemi: true });
+                gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
                 this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
@@ -56,7 +56,7 @@ class ManagerLevel {
      * @param {() => void} func
      */
     timer(time, func) {
-        setTimeout(() => {
+        window.setTimeout(() => {
             func();
         }, time);
     }
