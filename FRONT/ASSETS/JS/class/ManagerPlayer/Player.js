@@ -28,7 +28,8 @@ class Soucoupe {
     }
 
     /**
-     * @returns
+     * Retourne les nouvelles coordonnées player pour gérer les collisions
+     * @returns {{ x: number, y: number, xMax: number, yMax: number }}
      */
     get newCoordinatesPlayer() {
         return {
@@ -70,7 +71,6 @@ class Soucoupe {
         [this.width, this.height] = ["ArrowLeft", "ArrowRight"].includes(direction)
             ? this.widthAndHeightDic.LeftRight
             : this.widthAndHeightDic.UpDown;
-        // console.log([this.width, this.height]);
         this.draw();
     }
 

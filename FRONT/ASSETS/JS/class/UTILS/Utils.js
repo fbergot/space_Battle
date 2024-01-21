@@ -4,6 +4,7 @@ class Utils {
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
         this.$$ = (selector) => document.querySelectorAll(selector);
+        this.eventStartGame = new CustomEvent("gamestart");
     }
 
     /**
@@ -75,14 +76,26 @@ class Utils {
     }
 
     /**
-     * @param {number} index
+     *
+     * @param {number} nbInit
+     * @param {() => void} func
      */
-    makeTimerGame(index) {
-        this.$("#time").innerText = levelChoice(index).levelTime;
+    startTimerGame(nbInit, time = 1000) {
+        let count = nbInit;
+        this.$("#startCounter").innerText = nbInit;
+
         this.idSetInterval = window.setInterval(() => {
-            this.$("#time").innerText = parseInt(this.$("#time").innerText) - 1000;
-            if (parseInt(this.$("#time").innerText) - 1000 === 0) window.clearInterval(this.idSetInterval);
-        }, 1000);
+            --count;
+            this.$("#startCounter").innerText = count;
+            if (count === 0) {
+                this.$("#startCounter").innerText = "GOOOO !!!";
+            }
+            if (count === -1) {
+                window.clearInterval(this.idSetInterval);
+                this.$(".startTime").style.display = "none";
+                document.dispatchEvent(this.eventStartGame);
+            }
+        }, time);
     }
 }
 

@@ -1,12 +1,14 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
-import Soucoupe from "../ManagerSoucoupe/Soucoupe.js";
+import Player from "../ManagerPlayer/Player.js";
 import ManagerBloc from "../ManagerBloc/ManagerBlocs.js";
 import Collision from "../ManagerCollision/Collision.js";
 import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
+import GameParameters from "./GameParameters.js";
 
 class Game {
     constructor() {
+        this.gameParameters = new GameParameters(3);
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.idTimer = null;
@@ -15,7 +17,7 @@ class Game {
         this.managerBlocInstance = new ManagerBloc();
         this.managerEnnemisInstance = new ManagerEnnemis();
         this.managerCollisionInstance = null;
-        this.soucoupeInstance = new Soucoupe();
+        this.playerInstance = new Player();
         this.utils.$("#background").style.width = `${this.canvas.canvasWidth}px`;
         this.utils.$("#background").style.height = `${this.canvas.canvasHeight}px`;
     }
@@ -57,20 +59,20 @@ class Game {
         if (typeEnnemis === "blocs") {
             this.managerBlocInstance.updateBlocs();
             this.managerCollisionInstance.checkIfCollision(
-                this.soucoupeInstance.newCoordinatesPlayer,
+                this.playerInstance.newCoordinatesPlayer,
                 "managerBlocInstance"
             );
         }
 
         if (typeEnnemis === "soucoupe") {
-            this.managerEnnemisInstance.updateEnnemis(this.soucoupeInstance.coordinates);
+            this.managerEnnemisInstance.updateEnnemis(this.playerInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
-                this.soucoupeInstance.newCoordinatesPlayer,
+                this.playerInstance.newCoordinatesPlayer,
                 "managerEnnemisInstance"
             );
         }
 
-        this.soucoupeInstance.update();
+        this.playerInstance.update();
 
         this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, typeEnnemis));
     }

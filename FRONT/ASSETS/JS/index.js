@@ -12,46 +12,19 @@ const utilsInstance = UTILS;
  * @param {number} i
  */
 function* levelMove(i) {
-    yield (() => {
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
-
-    yield (() => {
-        i++;
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
-
-    yield (() => {
-        i++;
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
-
-    yield (() => {
-        i++;
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
-
-    yield (() => {
-        i++;
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
-
-    yield (() => {
-        i++;
-        managerLevelInstance.loadLevel(i);
-        utilsInstance.makeTimerGame(i);
-    })();
+    yield managerLevelInstance.loadLevel(i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
 }
 
 const generator = levelMove(0);
 const managerLevelInstance = new ManagerLevel(gameInstance, generator);
 
-utilsInstance.addEvListener("#addEnnemis", "click", () => {
+document.addEventListener("gamestart", () => {
     generator.next();
 });
 

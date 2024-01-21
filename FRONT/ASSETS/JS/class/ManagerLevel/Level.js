@@ -16,6 +16,7 @@ class ManagerLevel {
         this.ctx = this.canvas.ctx;
         this.gameInstance = gameInstance;
         this.currentTimeLevel;
+        this.utils.startTimerGame(3);
         this.arrLevelsFunc = [
             (gameInstance, index) => {
                 gameInstance.initBlocs(this.levelChoice(index).ennemis.nb);
