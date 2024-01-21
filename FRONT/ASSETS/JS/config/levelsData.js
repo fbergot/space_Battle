@@ -5,15 +5,9 @@ const levelsData = [
             type: "blocs",
         },
         levelTime: 15000,
-        endLevel: null,
     },
     {
-        ennemis: {
-            nb: 0,
-            type: null,
-        },
         levelTime: 5000,
-        endLevel: null,
     },
     {
         ennemis: {
@@ -21,15 +15,9 @@ const levelsData = [
             type: "blocs",
         },
         levelTime: 15000,
-        endLevel: null,
     },
     {
-        ennemis: {
-            nb: 0,
-            type: null,
-        },
         levelTime: 5000,
-        endLevel: null,
     },
     {
         ennemis: {
@@ -37,15 +25,19 @@ const levelsData = [
             type: "soucoupe",
         },
         levelTime: 15000,
-        endLevel: null,
+    },
+    {
+        levelTime: 5000,
     },
     {
         ennemis: {
-            nb: 0,
-            type: null,
+            nb: 8,
+            type: "soucoupe",
         },
+        levelTime: 15000,
+    },
+    {
         levelTime: 5000,
-        endLevel: null,
     },
 ];
 

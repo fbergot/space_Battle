@@ -19,6 +19,7 @@ function* levelMove(i) {
     yield managerLevelInstance.loadLevel(++i);
     yield managerLevelInstance.loadLevel(++i);
     yield managerLevelInstance.loadLevel(++i);
+    yield managerLevelInstance.loadLevel(++i);
 }
 
 const generator = levelMove(0);

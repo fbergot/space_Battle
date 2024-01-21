@@ -16,37 +16,40 @@ class ManagerLevel {
         this.ctx = this.canvas.ctx;
         this.gameInstance = gameInstance;
         this.currentTimeLevel;
+        this.currentTimeEndLevel;
         this.utils.startTimerGame(3);
         this.arrLevelsFunc = [
             (gameInstance, index) => {
                 gameInstance.initBlocs(this.levelChoice(index).ennemis.nb);
                 gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
                 gameInstance.initBlocs(this.levelChoice(index).ennemis.nb);
                 gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
                 gameInstance.initEnnemis(this.levelChoice(index).ennemis.nb);
                 gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
             },
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.currentTimeLevel = this.levelChoice(index).levelTime;
+            },
+            (gameInstance, index) => {
+                gameInstance.initEnnemis(this.levelChoice(index).ennemis.nb);
+                gameInstance.renderLoop(this.levelChoice(index).ennemis.type);
+            },
+            (gameInstance, index) => {
+                this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
+                gameInstance.stopRenderLoop();
             },
         ];
     }
@@ -56,10 +59,21 @@ class ManagerLevel {
      * @param {number} time
      * @param {() => void} func
      */
-    timer(time, func) {
+    timer(time) {
         window.setTimeout(() => {
-            func();
+            document.dispatchEvent(this.utils.eventStartGame);
         }, time);
+
+        this.currentTimeEndLevel = time / 1000;
+        this.utils.$("#time").innerText = this.currentTimeEndLevel;
+
+        this.idSetInterval = window.setInterval(() => {
+            this.currentTimeEndLevel -= 1;
+            this.utils.$("#time").innerText = this.currentTimeEndLevel;
+            if (this.currentTimeEndLevel === 1) {
+                window.clearInterval(this.idSetInterval);
+            }
+        }, 1000);
     }
 
     /**
@@ -68,7 +82,8 @@ class ManagerLevel {
      */
     loadLevel(level) {
         this.arrLevelsFunc[level](this.gameInstance, level);
-        this.timer(this.currentTimeLevel, () => this.generator.next());
+        this.currentTimeLevel = this.levelChoice(level).levelTime;
+        this.timer(this.currentTimeLevel);
     }
 }
 
