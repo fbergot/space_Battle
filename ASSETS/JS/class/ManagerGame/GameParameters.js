@@ -1,7 +1,7 @@
 import utilsInstance from "../UTILS/Utils.js";
 
 class GameParameters {
-    constructor(startLife) {
+    constructor(startLife, { managerBlocInstance, managerEnnemisInstance }) {
         this.lifesPlayer = startLife;
         this.utilsInstance = utilsInstance;
         this.lifeHTML = this.utilsInstance.$("#life");
@@ -9,7 +9,15 @@ class GameParameters {
         this.scoreHTML = this.utilsInstance.$("#score");
         this.scoreHTML.innerText = 0;
 
-        document.addEventListener("collision", (e) => lifeFunc.call(this, e), { once: false });
+        document.addEventListener(
+            "collision",
+            (e) => {
+                lifeFunc.call(this, e);
+                managerBlocInstance.instancesPop(e.detail.ennemiIndex);
+                // console.log(e.detail.ennemiIndex);
+            },
+            { once: false }
+        );
 
         function lifeFunc(e) {
             ++this.lifesPlayer;

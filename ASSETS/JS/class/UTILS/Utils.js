@@ -77,10 +77,15 @@ class Utils {
 
     /**
      *
-     * @param {number} nbInit
-     * @param {() => void} func
+     * @param {number} nbInit seconde
+     * @param {number} time MS
+     * @param {Boolean} reinit
      */
-    startTimerGame(nbInit, time = 1000) {
+    startTimerGame(nbInit, time = 1000, reinit = false) {
+        if (reinit) {
+            this.$(".startTime").style.display = "block";
+            this.$(".container-counter").classList.remove("rotateCounter");
+        }
         let count = nbInit;
         this.$("#startCounter").innerText = nbInit;
 
@@ -89,10 +94,12 @@ class Utils {
             this.$("#startCounter").innerText = count;
             if (count === 0) {
                 this.$("#startCounter").innerText = "GOOOO !!!";
+                this.$(".container-counter").classList.add("rotateCounter");
             }
             if (count === -1) {
                 window.clearInterval(this.idSetInterval);
-                this.$(".startTime").style.display = "none";
+                if (!reinit) this.$(".startTime").style.display = "none";
+                else this.$(".startTime").style.display = "block";
                 document.dispatchEvent(this.eventStartGame);
             }
         }, time);

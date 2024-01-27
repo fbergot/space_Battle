@@ -5,17 +5,21 @@ import ManagerBloc from "../ManagerBloc/ManagerBlocs.js";
 import Collision from "../ManagerCollision/Collision.js";
 import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
 import GameParameters from "./GameParameters.js";
+import Bloc from "../ManagerBloc/Bloc.js";
 
 class Game {
     constructor() {
-        this.gameParameters = new GameParameters(3);
+        this.managerBlocInstance = new ManagerBloc();
+        this.managerEnnemisInstance = new ManagerEnnemis();
+        this.gameParameters = new GameParameters(0, {
+            managerBlocInstance: this.managerBlocInstance,
+            managerEnnemisInstance: this.managerEnnemisInstance,
+        });
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.idTimer = null;
         this.counterGame = null;
         this.utils = utilsInstance;
-        this.managerBlocInstance = new ManagerBloc();
-        this.managerEnnemisInstance = new ManagerEnnemis();
         this.managerCollisionInstance = null;
         this.playerInstance = new Player();
         this.utils.$("#background").style.width = `${this.canvas.canvasWidth}px`;
@@ -23,21 +27,29 @@ class Game {
     }
 
     /**
-     * Load les instances
+     * Load les instances avec Collision
      * @param {number} nbOfInstances
+     * @param {'bloc' | 'ennemi'} typeofInstance
      */
-    initBlocs(nbOfInstances) {
-        this.managerBlocInstance.generation(nbOfInstances);
-        this.managerCollisionInstance = new Collision(this.managerBlocInstance, this.managerEnnemisInstance);
+    initInstances(nbOfInstances, typeofInstance) {
+        if (typeofInstance === "bloc") {
+            this.managerBlocInstance.generation(nbOfInstances);
+            this.managerCollisionInstance = new Collision(this);
+        }
+        if (typeofInstance === "ennemi") {
+            this.managerEnnemisInstance.generation(nbOfInstances);
+            this.managerCollisionInstance = new Collision(this);
+        }
     }
 
     /**
-     * Load les instances
-     * @param {number} nbOfInstances
+     * @returns { { instancesBloc: Bloc, instancesEnnemi: Ennemi instanceOf Ennemi }}
      */
-    initEnnemis(nbOfInstances) {
-        this.managerEnnemisInstance.generation(nbOfInstances);
-        this.managerCollisionInstance = new Collision(this.managerBlocInstance, this.managerEnnemisInstance);
+    get allInstances() {
+        return {
+            instancesBloc: this.managerBlocInstance.instances,
+            instancesEnnemi: this.managerEnnemisInstance.instances,
+        };
     }
 
     /**
@@ -45,8 +57,8 @@ class Game {
      */
     stopRenderLoop() {
         window.cancelAnimationFrame(this.idTimer);
-        this.managerBlocInstance.blocInstancesReInit();
-        this.managerEnnemisInstance.ennemisInstancesReInit();
+        this.managerBlocInstance.instancesReInit();
+        this.managerEnnemisInstance.instancesReInit();
     }
 
     /**
@@ -55,24 +67,23 @@ class Game {
      */
     renderLoop(typeEnnemis) {
         this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
+        this.playerInstance.update();
 
-        if (typeEnnemis === "blocs") {
-            this.managerBlocInstance.updateBlocs();
+        if (typeEnnemis === "bloc") {
+            this.managerBlocInstance.update();
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.newCoordinatesPlayer,
-                "managerBlocInstance"
+                "instancesBloc"
             );
         }
 
         if (typeEnnemis === "soucoupe") {
-            this.managerEnnemisInstance.updateEnnemis(this.playerInstance.coordinates);
+            this.managerEnnemisInstance.update(this.playerInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.newCoordinatesPlayer,
-                "managerEnnemisInstance"
+                "instancesEnnemi"
             );
         }
-
-        this.playerInstance.update();
 
         this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, typeEnnemis));
     }

@@ -1,8 +1,8 @@
 const levelsData = [
     {
         ennemis: {
-            nb: 4,
-            type: "blocs",
+            nb: 10,
+            type: "bloc",
         },
         levelTime: 15000,
     },
@@ -12,7 +12,7 @@ const levelsData = [
     {
         ennemis: {
             nb: 8,
-            type: "blocs",
+            type: "bloc",
         },
         levelTime: 15000,
     },

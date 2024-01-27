@@ -1,15 +1,15 @@
 class Collision {
-    constructor(managerBlocInstance, managerEnnemisInstance) {
-        this.managerBlocInstance = managerBlocInstance;
-        this.managerEnnemisInstance = managerEnnemisInstance;
+    constructor(gameInstance) {
+        this.gameInstance = gameInstance;
         this.instancesCoordinatesAndWidthHeight;
-        this.eventName = new CustomEvent("collision");
     }
 
-    checkIfCollision(coordsPlayerWidthAndHeight, manager) {
-        this.instancesCoordinatesAndWidthHeight = this[manager].instances.map((ennemiInstance) => {
-            return ennemiInstance.coordinatesWithWidthAndHeight;
-        });
+    checkIfCollision(coordsPlayerWidthAndHeight, typeEnnemi) {
+        this.instancesCoordinatesAndWidthHeight = this.gameInstance.allInstances[typeEnnemi].map(
+            (ennemiInstance) => {
+                return ennemiInstance.coordinatesWithWidthAndHeight;
+            }
+        );
         this.calculateCollision(coordsPlayerWidthAndHeight, this.instancesCoordinatesAndWidthHeight);
     }
 
@@ -19,12 +19,18 @@ class Collision {
      * @param {{ xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[]} arrEnnemisTotalCoordinates
      */
     calculateCollision({ x, y, xMax, yMax }, arrEnnemisTotalCoordinates) {
-        arrEnnemisTotalCoordinates.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax }) => {
+        arrEnnemisTotalCoordinates.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax }, index) => {
             if (
                 ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
                 ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
             ) {
-                document.dispatchEvent(this.eventName);
+                document.dispatchEvent(
+                    new CustomEvent("collision", {
+                        detail: {
+                            ennemiIndex: index,
+                        },
+                    })
+                );
             }
         });
     }

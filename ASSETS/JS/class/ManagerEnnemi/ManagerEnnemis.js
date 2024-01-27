@@ -12,7 +12,7 @@ class ManagerEnnemis {
     }
 
     /**
-     * @returns { Ennemi[] }
+     * @returns { Ennemi instanceOf Ennemi[] }
      */
     get instances() {
         return this.#allEnnemisInstances;
@@ -21,8 +21,15 @@ class ManagerEnnemis {
     /**
      * Reinit le array des instances
      */
-    ennemisInstancesReInit() {
+    instancesReInit() {
         this.#allEnnemisInstances = [];
+    }
+
+    /**
+     * @param {number} index
+     */
+    instancesPop(index) {
+        this.#allEnnemisInstances = this.#allEnnemisInstances.filter((_, i) => i != index);
     }
 
     /**
@@ -48,7 +55,7 @@ class ManagerEnnemis {
      * Gère le move des ennemis
      * @param {[x: number, y: number]} coordinatesPlayer
      */
-    updateEnnemis(coordinatesPlayer) {
+    update(coordinatesPlayer) {
         this.#allEnnemisInstances.forEach((ennemiInstance) => {
             ennemiInstance.update(coordinatesPlayer);
         }, this);

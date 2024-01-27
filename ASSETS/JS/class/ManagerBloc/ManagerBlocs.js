@@ -14,7 +14,7 @@ class ManagerBloc {
     }
 
     /**
-     * @returns { Bloc[] }
+     * @returns { Bloc instanceOf Bloc[] }
      */
     get instances() {
         return this.#allBlocsInstances;
@@ -23,8 +23,18 @@ class ManagerBloc {
     /**
      * Reinit le array des instances
      */
-    blocInstancesReInit() {
+    instancesReInit() {
         this.#allBlocsInstances = [];
+    }
+
+    /**
+     * @param {number} index
+     */
+    instancesPop(index) {
+        this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => {
+            console.log(i, index);
+            return i != index;
+        });
     }
 
     /**
@@ -50,18 +60,24 @@ class ManagerBloc {
      * Ajoute les limites
      * @param {[x: number, y: number]} param0
      * @param {number} speed
+     * @param {string} direction
      * @returns {[x: number, y: number]}
      */
-    mouvementsBlocsBasic([x, y], speed) {
-        y += speed;
-        x -= speed;
+    mouvementsBlocsBasic([x, y], speed, direction = "top_bottom") {
+        if (["top_bottom", "all"].includes(direction)) {
+            y += speed;
+        }
+        if (["left_right", "all"].includes(direction)) {
+            x += speed;
+        }
+        // x -= speed;
         return [x, y];
     }
 
     /**
      * Gère le move des blocs
      */
-    updateBlocs() {
+    update() {
         this.#allBlocsInstances.forEach((blocInstance) => {
             blocInstance.update(this.mouvementsBlocsBasic);
         }, this);

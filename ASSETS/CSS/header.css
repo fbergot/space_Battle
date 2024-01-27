@@ -1,9 +1,15 @@
 header {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-direction: row;
 
-    & img {
+    & > .header-name > img {
         margin-bottom: 5px;
+    }
+
+    & > .time-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

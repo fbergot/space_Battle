@@ -3,7 +3,7 @@ import UTILS from "./class/UTILS/Utils.js";
 import ManagerLevel from "./class/ManagerLevel/Level.js";
 import { levelChoice } from "./config/levelsData.js";
 
-const gameInstance = new Game();
+export const gameInstance = new Game();
 const utilsInstance = UTILS;
 
 /**

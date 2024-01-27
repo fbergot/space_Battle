@@ -13,15 +13,15 @@ class Bloc {
         this.colors = ["#FFF", "#ADF", "blue", "#AAF", "#FFF", "red"];
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
-        this.speedInstance.valueLevel = this.utils.randomMinMax(0.8, 1.2);
+        this.speedInstance.valueLevel = this.utils.randomMinMax(1, 3);
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.color = this.utils.getRandomElementFromArr(this.colors);
-        this.width = this.utils.randomMinMax(100, 150);
-        this.height = this.utils.randomMinMax(100, 150);
+        this.width = this.utils.randomMinMax(50, 100);
+        this.height = this.utils.randomMinMax(20, 35);
         this.widthAndHeight = [this.width, this.height];
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
-        this.#y = this.utils.randomMinMax(0, 500);
+        this.#y = this.utils.randomMinMax(100, 500);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
     }
 
