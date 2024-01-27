@@ -3,11 +3,9 @@ import utilsInstance from "../UTILS/Utils.js";
 class GameParameters {
     constructor(startLife, { managerBlocInstance, managerEnnemisInstance }) {
         this.lifesPlayer = startLife;
-        this.utilsInstance = utilsInstance;
-        this.lifeHTML = this.utilsInstance.$("#life");
+        this.utils = utilsInstance;
+        this.lifeHTML = this.utils.$("#life");
         this.lifeHTML.innerText = this.lifesPlayer;
-        this.scoreHTML = this.utilsInstance.$("#score");
-        this.scoreHTML.innerText = 0;
 
         document.addEventListener(
             "collision",
@@ -20,8 +18,9 @@ class GameParameters {
         );
 
         function lifeFunc(e) {
+            const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)}`;
             ++this.lifesPlayer;
-            this.lifeHTML.innerText = this.lifesPlayer;
+            this.lifeHTML.innerText = wording(this.lifesPlayer, "Collision");
         }
     }
 }

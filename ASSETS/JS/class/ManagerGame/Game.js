@@ -24,6 +24,7 @@ class Game {
         this.playerInstance = new Player();
         this.utils.$("#background").style.width = `${this.canvas.canvasWidth}px`;
         this.utils.$("#background").style.height = `${this.canvas.canvasHeight}px`;
+        this.utils.setCSSVar("--widthCanvas", `${this.canvas.canvasWidth}px`);
     }
 
     /**

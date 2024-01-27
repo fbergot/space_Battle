@@ -1,7 +1,7 @@
 :root {
     --radius: 7px;
     --heightHeader: 0px;
-    --widthHeader: 0px;
+    --widthCanvas: 0px;
 }
 
 body {

@@ -1,6 +1,13 @@
+:root {
+    --radius: 7px;
+    --heightHeader: 0px;
+    --widthCanvas: 0px;
+}
+
 header {
+    width: var(--widthCanvas);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
 
     & > .header-name > img {
@@ -8,6 +15,12 @@ header {
     }
 
     & > .time-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & > .score-area {
         display: flex;
         justify-content: center;
         align-items: center;

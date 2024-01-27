@@ -27,7 +27,7 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
+                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -37,7 +37,7 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
+                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -47,7 +47,7 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
+                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -57,7 +57,7 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
+                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
         ];
     }
@@ -73,11 +73,12 @@ class ManagerLevel {
         }, time);
 
         this.currentTimeEndLevel = time / 1000;
-        this.utils.$("#time").innerText = this.currentTimeEndLevel;
+        const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)} avant le fin du niveau`;
+        this.utils.$("#time").innerText = wording(this.currentTimeEndLevel, "seconde");
 
         this.idSetInterval = window.setInterval(() => {
             this.currentTimeEndLevel -= 1;
-            this.utils.$("#time").innerText = this.currentTimeEndLevel;
+            this.utils.$("#time").innerText = wording(this.currentTimeEndLevel, "seconde");
             if (this.currentTimeEndLevel === 1) {
                 window.clearInterval(this.idSetInterval);
             }
@@ -90,6 +91,9 @@ class ManagerLevel {
      */
     loadLevel(level) {
         this.arrLevelsFunc[level](this.gameInstance, level);
+        if (level % 2 !== 0) {
+            this.utils.startTimerGame(this.levelChoice(level).levelTime / 1000, 1000, true);
+        }
         this.currentTimeLevel = this.levelChoice(level).levelTime;
         this.timer(this.currentTimeLevel);
     }

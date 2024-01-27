@@ -37,6 +37,7 @@ const levelsData = [
         levelTime: 15000,
     },
     {
+        end: true,
         levelTime: 5000,
     },
 ];

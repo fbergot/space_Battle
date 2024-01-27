@@ -8,6 +8,22 @@ class Utils {
     }
 
     /**
+     * @param {string} word
+     * @param {number} nb
+     * @returns { string }
+     */
+    plural(word, nb) {
+        const Word = nb > 1 ? `${word}s` : word;
+        return Word;
+    }
+
+    setCSSVar(varCSS, value) {
+        const root = this.$(":root");
+        root.style.setProperty(varCSS, value);
+        var rs = getComputedStyle(root);
+    }
+
+    /**
      * @param {array} arr Array for take one element random
      * @return {mixed} element random in the array
      */
