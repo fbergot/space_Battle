@@ -14,7 +14,7 @@ class GameParameters {
             (e) => {
                 lifeFunc.call(this, e);
                 managerBlocInstance.instancesPop(e.detail.ennemiIndex);
-                // console.log(e.detail.ennemiIndex);
+                managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
             },
             { once: false }
         );

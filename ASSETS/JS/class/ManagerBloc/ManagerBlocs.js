@@ -32,7 +32,6 @@ class ManagerBloc {
      */
     instancesPop(index) {
         this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => {
-            console.log(i, index);
             return i != index;
         });
     }
