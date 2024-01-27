@@ -6,20 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Space Limit</title>
         <audio id="audio1" src="./ASSETS/SOUNDS/08. Stormwind.mp3" type="audio/mpeg" autoplay></audio>
-        <script type="module" src="../FRONT/ASSETS/JS/index.js" defer></script>
-        <link rel="stylesheet" href="../FRONT/ASSETS/CSS/style.css" />
-        <link rel="stylesheet" href="../FRONT/ASSETS/CSS/Canvas.css" />
-        <link rel="stylesheet" href="../FRONT/ASSETS/CSS/header.css" />
+        <script type="module" src="./ASSETS/JS/index.js" defer></script>
+        <link rel="stylesheet" href="./ASSETS/CSS/style.css" />
+        <link rel="stylesheet" href="./ASSETS/CSS/Canvas.css" />
+        <link rel="stylesheet" href="./ASSETS/CSS/header.css" />
     </head>
 
     <body>
         <header>
+            <div>Time: <span id="time"></span>S</div>
+
             <div class="header-name">
                 <img src="./ASSETS/IMAGES/images-space-ronde.jpg" alt="" srcset="" />
             </div>
-            <div id="time"></div>
-            <div id="life"></div>
-            <div id="score"></div>
+
+            <div>Collisions: <span id="life"></span> Score: <span id="score"></span></div>
         </header>
 
         <main>
