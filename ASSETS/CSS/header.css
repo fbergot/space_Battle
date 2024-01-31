@@ -17,6 +17,11 @@ header {
         align-items: center;
         padding: 15px 15px;
         margin-left: 20px;
+        width: 185px;
+
+        &:nth-last-of-type(1) {
+            margin-right: 30px;
+        }
     }
 
     & > .header-name > img {
@@ -37,24 +42,25 @@ header {
         align-items: center;
         margin-right: 20px;
         padding: 8.5px 15px;
+        position: relative;
+        bottom: 5px;
     }
 
     & > .score-area,
     & > .area-time-level {
         outline: 1px solid grey;
         border-radius: var(--radius);
-        width: 130px;
+        width: 185px;
         font-size: 25px;
-    }
-
-    & > .area-time-level {
-        width: 300px;
     }
 
     & #collision,
     & #time,
-    & #level {
+    & #level,
+    & #ennemis {
         padding: 15px 5px;
         font-size: 15px;
+        position: relative;
+        bottom: 5px;
     }
 }

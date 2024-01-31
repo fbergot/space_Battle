@@ -64,7 +64,7 @@ class Game {
 
     /**
      * Boucle recursive du jeu
-     * @param { { typeEnnemis: string } } typeEnnemis
+     * @param { 'bloc' | 'ennemi' } typeEnnemis
      */
     renderLoop(typeEnnemis) {
         this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);

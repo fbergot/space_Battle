@@ -4,6 +4,11 @@ class Collision {
         this.instancesCoordinatesAndWidthHeight;
     }
 
+    /**
+     * Analyse si collision
+     * @param { { x: number, y: number, xMax: number, yMax: number } } coordsPlayerWidthAndHeight
+     * @param {'bloc' | 'ennemi'} typeEnnemi
+     */
     checkIfCollision(coordsPlayerWidthAndHeight, typeEnnemi) {
         this.instancesCoordinatesAndWidthHeight = this.gameInstance.allInstances[typeEnnemi].map(
             (ennemiInstance) => {
@@ -14,9 +19,9 @@ class Collision {
     }
 
     /**
-     *
-     * @param {{ x: number, y: number, xMax: number, yMax: number }} coordsPlayerWidthAndHeight
-     * @param {{ xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[]} arrEnnemisTotalCoordinates
+     * Calcule si collision effective
+     * @param { { x: number, y: number, xMax: number, yMax: number } } coordsPlayerWidthAndHeight
+     * @param { { xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[] } arrEnnemisTotalCoordinates
      */
     calculateCollision({ x, y, xMax, yMax }, arrEnnemisTotalCoordinates) {
         arrEnnemisTotalCoordinates.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax }, index) => {

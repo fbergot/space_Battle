@@ -1,6 +1,7 @@
 import Bloc from "../ManagerBloc/Bloc.js";
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import utilsInstance from "../UTILS/Utils.js";
+import { levelsData } from "../../config/levelsData.js";
 
 class GameParameters {
     /**
@@ -13,22 +14,45 @@ class GameParameters {
         this.utils = utilsInstance;
         this.lifeHTML = this.utils.$("#collision");
         this.lifeHTML.innerText = this.lifesPlayer;
+        this.ennemisHTML = this.utils.$("#ennemis");
 
         document.addEventListener(
-            "collision",
+            "setEnnemis",
             (e) => {
-                lifeFunc.call(this, e);
-                managerBlocInstance.instancesPop(e.detail.ennemiIndex);
-                managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
+                this.ennemisHTML.innerText = e.detail.nbEnnemis;
+                this.nbEnnemisInLive = e.detail.nbEnnemis;
             },
             { once: false }
         );
 
-        function lifeFunc(e) {
-            const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)}`;
-            ++this.lifesPlayer;
-            this.lifeHTML.innerText = wording(this.lifesPlayer, "Collision");
-        }
+        document.addEventListener(
+            "collision",
+            (e) => {
+                this.lifeFunc.call(this, e);
+                managerBlocInstance.instancesPop(e.detail.ennemiIndex);
+                managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
+                this.ennemisFunc.call(this, e);
+            },
+            { once: false }
+        );
+    }
+
+    /**
+     *
+     * @param {Event} e
+     */
+    ennemisFunc(e) {
+        --this.nbEnnemisInLive;
+        this.ennemisHTML.innerText = this.nbEnnemisInLive;
+    }
+
+    /**
+     *
+     * @param {Event} e
+     */
+    lifeFunc(e) {
+        ++this.lifesPlayer;
+        this.lifeHTML.innerText = this.lifesPlayer;
     }
 }
 

@@ -2,6 +2,7 @@ import Canvas from "../ManagerCanvas/Canvas.js";
 import Game from "../ManagerGame/Game.js";
 import utilsInstance from "../UTILS/Utils.js";
 import { levelChoice } from "../../function/utilsFunctions.js";
+import GameParameters from "../ManagerGame/GameParameters.js";
 
 class ManagerLevel {
     /**
@@ -9,6 +10,7 @@ class ManagerLevel {
      * @param {Game} gameInstance
      */
     constructor(gameInstance, generator) {
+        this.GameParameters = GameParameters;
         this.levelChoice = levelChoice;
         this.utils = utilsInstance;
         this.generator = generator;
@@ -69,12 +71,11 @@ class ManagerLevel {
         }, time);
 
         this.currentTimeEndLevel = time / 1000;
-        const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)}`;
-        this.utils.$("#time").innerText = wording(this.currentTimeEndLevel, "seconde");
+        this.utils.$("#time").innerText = `${this.currentTimeEndLevel} S`;
 
         this.idSetInterval = window.setInterval(() => {
             this.currentTimeEndLevel -= 1;
-            this.utils.$("#time").innerText = wording(this.currentTimeEndLevel, "seconde");
+            this.utils.$("#time").innerText = `${this.currentTimeEndLevel} S`;
             if (this.currentTimeEndLevel === 1) {
                 window.clearInterval(this.idSetInterval);
             }
@@ -86,7 +87,7 @@ class ManagerLevel {
      * @param {number} level
      */
     loadLevel(levelIndex) {
-        const { level, levelTime } = this.levelChoice(levelIndex);
+        const { level, levelTime, ennemis } = this.levelChoice(levelIndex);
         this.arrLevelsFunc[levelIndex](this.gameInstance, levelIndex);
 
         if (levelIndex % 2 !== 0) this.utils.startTimerGame(levelTime / 1000, 1000, true);
@@ -94,6 +95,14 @@ class ManagerLevel {
 
         this.currentTimeLevel = levelTime;
         this.timer(this.currentTimeLevel);
+
+        document.dispatchEvent(
+            new CustomEvent("setEnnemis", {
+                detail: {
+                    nbEnnemis: ennemis?.nb || 0,
+                },
+            })
+        );
     }
 }
 
