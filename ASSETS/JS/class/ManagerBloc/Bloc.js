@@ -13,7 +13,7 @@ class Bloc {
         this.colors = ["#FFF", "#ADF", "blue", "#AAF", "#FFF", "red"];
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
-        this.speedInstance.valueLevel = this.utils.randomMinMax(1, 3);
+        this.speedInstance.valueLevel = this.utils.randomMinMax(2, 4);
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
         this.color = this.utils.getRandomElementFromArr(this.colors);
@@ -34,7 +34,9 @@ class Bloc {
         this.draw();
     }
 
-    /** Function for draw the bloc on the canvas */
+    /**
+     * Function for draw the bloc on the canvas
+     */
     draw() {
         this.ctx.beginPath();
         this.ctx.fillStyle = this.color;

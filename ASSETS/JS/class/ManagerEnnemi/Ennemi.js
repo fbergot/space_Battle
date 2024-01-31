@@ -12,7 +12,7 @@ class Ennemi {
     constructor() {
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
-        this.speedInstance.valueLevel = this.utils.randomMinMax(0.2, 2.5);
+        this.speedInstance.valueLevel = this.utils.randomMinMax(2, 4);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
         this.image = this.utils.makeImage("ennemis", "soucoupe");
         this.widthAndHeight = [100, 54];
