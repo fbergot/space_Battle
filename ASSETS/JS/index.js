@@ -14,8 +14,7 @@ const utilsInstance = UTILS;
  */
 function* levelMove(i, levelsTot) {
     while (i < levelsTot) {
-        yield managerLevelInstance.loadLevel(i);
-        i++;
+        yield managerLevelInstance.loadLevel(i++);
     }
 }
 
