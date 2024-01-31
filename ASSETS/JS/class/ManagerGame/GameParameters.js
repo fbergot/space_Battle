@@ -1,10 +1,17 @@
+import Bloc from "../ManagerBloc/Bloc.js";
+import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import utilsInstance from "../UTILS/Utils.js";
 
 class GameParameters {
+    /**
+     *
+     * @param {number} startLife
+     * @param { { managerBlocInstance: Bloc, managerEnnemisInstance: Ennemi } } param1
+     */
     constructor(startLife, { managerBlocInstance, managerEnnemisInstance }) {
         this.lifesPlayer = startLife;
         this.utils = utilsInstance;
-        this.lifeHTML = this.utils.$("#life");
+        this.lifeHTML = this.utils.$("#collision");
         this.lifeHTML.innerText = this.lifesPlayer;
 
         document.addEventListener(

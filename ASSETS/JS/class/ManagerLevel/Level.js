@@ -1,7 +1,7 @@
-import { levelChoice } from "../../config/levelsData.js";
 import Canvas from "../ManagerCanvas/Canvas.js";
 import Game from "../ManagerGame/Game.js";
 import utilsInstance from "../UTILS/Utils.js";
+import { levelChoice } from "../../function/utilsFunctions.js";
 
 class ManagerLevel {
     /**
@@ -27,7 +27,6 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -37,7 +36,6 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -47,7 +45,6 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
             (gameInstance, index) => {
                 window.clearInterval(this.utils.idSetInterval);
@@ -57,7 +54,6 @@ class ManagerLevel {
             (gameInstance, index) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
-                // this.utils.startTimerGame(this.levelChoice(index).levelTime / 1000, 1000, true);
             },
         ];
     }
@@ -73,7 +69,7 @@ class ManagerLevel {
         }, time);
 
         this.currentTimeEndLevel = time / 1000;
-        const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)} avant le fin du niveau`;
+        const wording = (nb, word) => `${nb} ${this.utils.plural(word, nb)}`;
         this.utils.$("#time").innerText = wording(this.currentTimeEndLevel, "seconde");
 
         this.idSetInterval = window.setInterval(() => {

@@ -6,8 +6,8 @@ import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
 class ManagerPosition {
-    /** @private {string} #instanceToMoveDirection */
-    #instanceToMoveDirection;
+    /** @private {string} #direction */
+    #direction;
 
     /**
      * @constructor
@@ -22,43 +22,43 @@ class ManagerPosition {
         this.canvas = Canvas;
         this.utils.addEvListener("html", "keydown", (e) => this.changeDirection.call(this, e));
         this.valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-        this.#instanceToMoveDirection = this.utils.getRandomElementFromArr(
+        this.#direction = this.utils.getRandomElementFromArr(
             this.valuesDirections.filter((_, index) => index < 2)
         );
     }
 
     /**
-     * @description Change direction of #instanceToMoveDirection
+     * @description Change direction of #direction
      * @param {EventTarget} e
      */
     changeDirection(e) {
         /** @description {Si la dir est déjà celle que l'on frappe ou que la touche frappée n'est pas une dir, on ignore} */
-        if (!this.valuesDirections.includes(e.key) || this.#instanceToMoveDirection == e.key) return;
-        this.#instanceToMoveDirection = e.key;
+        if (!this.valuesDirections.includes(e.key) || this.#direction == e.key) return;
+        this.#direction = e.key;
 
         if (this.currentInstance instanceof Soucoupe) this.updateCoordinates();
     }
 
     /**
-     * UPDATE LES COORDs of #instanceToMoveDirection
+     * UPDATE LES COORDs of #direction
      * @description {On vient get les points X, Y de l'instance injecté dans le constructor}
      */
     updateCoordinates() {
         let [x, y] = this.currentInstance.coordinates;
 
-        if (this.#instanceToMoveDirection === "ArrowUp") {
+        if (this.#direction === "ArrowUp") {
             // prettier-ignore
             if (y <= 0 - (26.6 * this.canvas.canvasBox)) y = this.canvas.canvasHeight;
             y -= this.speed;
-        } else if (this.#instanceToMoveDirection === "ArrowDown") {
+        } else if (this.#direction === "ArrowDown") {
             // prettier-ignore
             if (y >= this.canvas.canvasHeight) y = 0 - (26.6 * this.canvas.canvasBox);
             y += this.speed;
-        } else if (this.#instanceToMoveDirection === "ArrowLeft") {
+        } else if (this.#direction === "ArrowLeft") {
             // prettier-ignore
             if (x <= 0 - (26.6 * this.canvas.canvasBox)) x = this.canvas.canvasWidth;
             x -= this.speed;
-        } else if (this.#instanceToMoveDirection === "ArrowRight") {
+        } else if (this.#direction === "ArrowRight") {
             // prettier-ignore
             if (x >= this.canvas.canvasWidth) x = 0 - (26.6 * this.canvas.canvasBox);
             x += this.speed;
@@ -144,8 +144,8 @@ class ManagerPosition {
     /**
      * @returns {"ArrowLeft" | "ArrowRight" | "ArrowUp" | "ArrowDown"}
      */
-    get instanceToMoveDirection() {
-        return this.#instanceToMoveDirection;
+    get direction() {
+        return this.#direction;
     }
 }
 

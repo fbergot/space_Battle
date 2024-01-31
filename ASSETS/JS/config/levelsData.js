@@ -1,4 +1,4 @@
-const levelsData = [
+export const levelsData = [
     {
         ennemis: {
             nb: 10,
@@ -41,5 +41,3 @@ const levelsData = [
         levelTime: 5000,
     },
 ];
-
-export const levelChoice = (i) => levelsData.find((_, index) => i === index);

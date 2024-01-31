@@ -97,8 +97,3 @@ main {
         transform: rotate(1turn) scale(0.01);
     }
 }
-
-#life,
-#time {
-    padding: 10px;
-}

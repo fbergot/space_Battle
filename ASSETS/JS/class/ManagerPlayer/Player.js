@@ -46,6 +46,7 @@ class Soucoupe {
     get widthAndHeight() {
         return [this.width, this.height];
     }
+
     /**
      * @returns {[x: number, y: number]}
      */
@@ -65,7 +66,7 @@ class Soucoupe {
      */
     update() {
         this.PositionInstance.updateCoordinates();
-        const direction = this.PositionInstance.instanceToMoveDirection;
+        const direction = this.PositionInstance.direction;
         const imgName = `player_${direction.replace("Arrow", "").toUpperCase()}`;
         this.image = this.utils.makeImage("player", imgName);
         [this.width, this.height] = ["ArrowLeft", "ArrowRight"].includes(direction)

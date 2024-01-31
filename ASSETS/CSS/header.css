@@ -1,5 +1,5 @@
 :root {
-    --radius: 7px;
+    --radius: 5px;
     --heightHeader: 0px;
     --widthCanvas: 0px;
 }
@@ -7,7 +7,7 @@
 header {
     width: var(--widthCanvas);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
 
     & > .header-name > img {
@@ -15,14 +15,32 @@ header {
     }
 
     & > .time-area {
+        align-self: center;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 20px;
     }
 
     & > .score-area {
+        align-self: center;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-right: 20px;
+    }
+
+    & > .score-area,
+    & > .time-area {
+        outline: 1px solid grey;
+        border-radius: var(--radius);
+        width: 130px;
+        font-size: 25px;
+    }
+
+    & #collision,
+    & #time {
+        padding: 15px 5px;
+        font-size: 15px;
     }
 }

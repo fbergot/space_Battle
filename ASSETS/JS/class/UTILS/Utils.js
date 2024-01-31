@@ -1,4 +1,4 @@
-import { levelChoice } from "../../config/levelsData.js";
+import { levelChoice } from "../../function/utilsFunctions.js";
 
 class Utils {
     constructor() {
@@ -17,6 +17,10 @@ class Utils {
         return Word;
     }
 
+    /**
+     * @param {string} varCSS
+     * @param {string | number} value
+     */
     setCSSVar(varCSS, value) {
         const root = this.$(":root");
         root.style.setProperty(varCSS, value);
@@ -85,6 +89,8 @@ class Utils {
      */
     makeImage(typeOfgroup, type) {
         const src = this.getImagePath(typeOfgroup, type);
+        if (!src) throw new Error("Aucun path pour l'image.");
+
         const image = new Image();
         image.src = src;
 

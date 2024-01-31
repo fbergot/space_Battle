@@ -41,14 +41,14 @@ class ManagerEnnemis {
          * @param {number} nbIterations
          * @returns {void}
          */
-        const loopRecursive = (nbIterations) => {
+        const loopRecursive = (nbIterations = 0) => {
             if (nbIterations < nbOfInstances) {
                 this.#allEnnemisInstances.push(new Ennemi());
                 loopRecursive(++nbIterations);
             }
             return;
         };
-        loopRecursive(0);
+        loopRecursive();
     }
 
     /**
