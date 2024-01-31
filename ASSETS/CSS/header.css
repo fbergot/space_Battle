@@ -10,6 +10,15 @@ header {
     justify-content: space-between;
     flex-direction: row;
 
+    & > .area-time-level {
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 15px;
+        margin-left: 20px;
+    }
+
     & > .header-name > img {
         margin-bottom: 5px;
     }
@@ -19,7 +28,6 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 20px;
     }
 
     & > .score-area {
@@ -28,18 +36,24 @@ header {
         justify-content: center;
         align-items: center;
         margin-right: 20px;
+        padding: 8.5px 15px;
     }
 
     & > .score-area,
-    & > .time-area {
+    & > .area-time-level {
         outline: 1px solid grey;
         border-radius: var(--radius);
         width: 130px;
         font-size: 25px;
     }
 
+    & > .area-time-level {
+        width: 300px;
+    }
+
     & #collision,
-    & #time {
+    & #time,
+    & #level {
         padding: 15px 5px;
         font-size: 15px;
     }

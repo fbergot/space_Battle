@@ -5,9 +5,11 @@ export const levelsData = [
             type: "bloc",
         },
         levelTime: 15000,
+        level: 1,
     },
     {
         levelTime: 5000,
+        level: 1,
     },
     {
         ennemis: {
@@ -15,9 +17,11 @@ export const levelsData = [
             type: "bloc",
         },
         levelTime: 15000,
+        level: 2,
     },
     {
         levelTime: 5000,
+        level: 2,
     },
     {
         ennemis: {
@@ -25,9 +29,11 @@ export const levelsData = [
             type: "soucoupe",
         },
         levelTime: 15000,
+        level: 3,
     },
     {
         levelTime: 5000,
+        level: 3,
     },
     {
         ennemis: {
@@ -35,9 +41,11 @@ export const levelsData = [
             type: "soucoupe",
         },
         levelTime: 15000,
+        level: 4,
     },
     {
         end: true,
         levelTime: 5000,
+        level: 4,
     },
 ];

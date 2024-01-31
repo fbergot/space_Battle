@@ -85,12 +85,14 @@ class ManagerLevel {
      * Charge un level dans le pile des niveaux
      * @param {number} level
      */
-    loadLevel(level) {
-        this.arrLevelsFunc[level](this.gameInstance, level);
-        if (level % 2 !== 0) {
-            this.utils.startTimerGame(this.levelChoice(level).levelTime / 1000, 1000, true);
-        }
-        this.currentTimeLevel = this.levelChoice(level).levelTime;
+    loadLevel(levelIndex) {
+        const { level, levelTime } = this.levelChoice(levelIndex);
+        this.arrLevelsFunc[levelIndex](this.gameInstance, levelIndex);
+
+        if (levelIndex % 2 !== 0) this.utils.startTimerGame(levelTime / 1000, 1000, true);
+        else this.utils.$("#level").innerText = level;
+
+        this.currentTimeLevel = levelTime;
         this.timer(this.currentTimeLevel);
     }
 }
