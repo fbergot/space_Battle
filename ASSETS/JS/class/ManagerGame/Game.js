@@ -6,6 +6,7 @@ import Collision from "../ManagerCollision/Collision.js";
 import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
 import GameParameters from "./GameParameters.js";
 import Bloc from "../ManagerBloc/Bloc.js";
+import ManagerRocket from "../ManagerRocket/ManagerRocket.js";
 
 class Game {
     constructor() {
@@ -44,7 +45,7 @@ class Game {
     }
 
     /**
-     * @returns { { instancesBloc: Bloc, instancesEnnemi: Ennemi instanceOf Ennemi }}
+     * @returns { { instancesBloc: Bloc, instancesEnnemi: Ennemi }}
      */
     get allInstances() {
         return {
@@ -60,11 +61,12 @@ class Game {
         window.cancelAnimationFrame(this.idTimer);
         this.managerBlocInstance.instancesReInit();
         this.managerEnnemisInstance.instancesReInit();
+        this.playerInstance.managerRocketInstance.instancesReInit();
     }
 
     /**
      * Boucle recursive du jeu
-     * @param { 'bloc' | 'ennemi' } typeEnnemis
+     * @param { 'bloc' | 'soucoupe' } typeEnnemis
      */
     renderLoop(typeEnnemis) {
         this.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);

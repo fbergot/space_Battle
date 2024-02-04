@@ -1,7 +1,8 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
-import Position from "../ManagerPosition/Position.js";
+import { ManagerPosition, ManagerPositionWeapons } from "../ManagerPosition/Position.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Speed from "../ManagerSpeed/Speed.js";
+import ManagerRocket from "../ManagerRocket/ManagerRocket.js";
 
 class Soucoupe {
     /** @private {number} #x */
@@ -9,14 +10,18 @@ class Soucoupe {
     /** @private {number} #y */
     #y;
 
+    #direction;
+
     constructor() {
         this.speedInstance = new Speed();
         this.speedInstance.valueLevel = 4;
+        this.PositionInstance = new ManagerPosition(this, this.speedInstance);
+        this.managerRocketInstance = new ManagerRocket(this);
         this.utils = utilsInstance;
-        this.PositionInstance = new Position(this, this.speedInstance);
         this.image = null;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
+        this.#direction;
         this.width;
         this.height;
         this.widthAndHeightDic = {
@@ -55,6 +60,19 @@ class Soucoupe {
     }
 
     /**
+     * @returns {string}
+     */
+    get direction() {
+        return this.#direction;
+    }
+    /**
+     * @returns {string}
+     */
+    set direction(value) {
+        this.#direction = value;
+    }
+
+    /**
      * @param {[x: number, y: number]}
      */
     set coordinates(coordinatesXY) {
@@ -66,12 +84,13 @@ class Soucoupe {
      */
     update() {
         this.PositionInstance.updateCoordinates();
-        const direction = this.PositionInstance.direction;
-        const imgName = `player_${direction.replace("Arrow", "").toUpperCase()}`;
+        this.direction = this.PositionInstance.direction;
+        const imgName = `player_${this.direction.replace("Arrow", "").toUpperCase()}`;
         this.image = this.utils.makeImage("player", imgName);
-        [this.width, this.height] = ["ArrowLeft", "ArrowRight"].includes(direction)
+        [this.width, this.height] = ["ArrowLeft", "ArrowRight"].includes(this.direction)
             ? this.widthAndHeightDic.LeftRight
             : this.widthAndHeightDic.UpDown;
+        this.managerRocketInstance.update();
         this.draw();
     }
 

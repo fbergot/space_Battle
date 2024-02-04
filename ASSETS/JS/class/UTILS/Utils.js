@@ -75,6 +75,12 @@ class Utils {
                 spacial: `./ASSETS/IMAGES/ennemiSpatial.png`,
                 vaisseau: `./ASSETS/IMAGES/ennemiVaisseau.png`,
             },
+            rocket: {
+                rocket_DOWN: `./ASSETS/IMAGES/rocket_DOWN.png`,
+                rocket_UP: `./ASSETS/IMAGES/rocket_UP.png`,
+                rocket_LEFT: `./ASSETS/IMAGES/rocket_LEFT.png`,
+                rocket_RIGHT: `./ASSETS/IMAGES/rocket_RIGHT.png`,
+            },
         };
 
         if (type) return dictioPaths[typeOfgroup][type] || null;

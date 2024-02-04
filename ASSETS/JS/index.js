@@ -23,7 +23,7 @@ const initialLevel = 0;
 const generator = levelMove(initialLevel, levelsTot);
 const managerLevelInstance = new ManagerLevel(gameInstance, generator);
 
-document.addEventListener("gamestart", () => {
+document.addEventListener("gamestart", (e) => {
     generator.next();
 });
 

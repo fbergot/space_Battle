@@ -1,6 +1,6 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
-import ManagerPosition from "../ManagerPosition/Position.js";
+import { ManagerPosition } from "../ManagerPosition/Position.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
 class Bloc {

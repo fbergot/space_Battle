@@ -4,6 +4,9 @@ export const levelsData = [
             nb: 15,
             type: "bloc",
         },
+        player: {
+            rockets: 5,
+        },
         levelTime: 15000,
         level: 1,
     },
@@ -15,6 +18,9 @@ export const levelsData = [
         ennemis: {
             nb: 20,
             type: "bloc",
+        },
+        player: {
+            rockets: 10,
         },
         levelTime: 15000,
         level: 2,
@@ -28,6 +34,9 @@ export const levelsData = [
             nb: 8,
             type: "soucoupe",
         },
+        player: {
+            rockets: 15,
+        },
         levelTime: 15000,
         level: 3,
     },
@@ -39,6 +48,9 @@ export const levelsData = [
         ennemis: {
             nb: 12,
             type: "soucoupe",
+        },
+        player: {
+            rockets: 20,
         },
         levelTime: 15000,
         level: 4,

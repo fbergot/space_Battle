@@ -1,5 +1,5 @@
 import Canvas from "../ManagerCanvas/Canvas.js";
-import ManagerPosition from "../ManagerPosition/Position.js";
+import { ManagerPosition } from "../ManagerPosition/Position.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Speed from "../ManagerSpeed/Speed.js";
 
