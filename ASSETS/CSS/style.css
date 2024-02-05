@@ -120,13 +120,12 @@ main {
 .aside-main {
     width: 100px;
     outline: 2px solid black;
-
-    & > h2 {
-        font-size: 15px;
-        text-align: center;
-        border-bottom: 2px solid #000;
-        padding-bottom: 9px;
-    }
+}
+.aside-main > h2 {
+    font-size: 15px;
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 9px;
 }
 .right {
     border-radius: 0 var(--radius) var(--radius) 0;
