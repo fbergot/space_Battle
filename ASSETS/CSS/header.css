@@ -26,6 +26,7 @@ header {
 
     & > .header-name > img {
         margin-bottom: 5px;
+        width: 126px;
     }
 
     & > .time-area {

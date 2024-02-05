@@ -54,7 +54,12 @@ class ManagerRocket {
      */
     generation(direction) {
         const rocket = new Rocket(this.instanceNeedRockets, direction);
-        rocket.coordinates = this.instanceNeedRockets.coordinates;
+        let [x, y] = this.instanceNeedRockets.coordinates;
+        if (["ArrowUp", "ArrowDown"].includes(direction)) {
+            rocket.coordinates = [x + (this.instanceNeedRockets.width / 2 - rocket.width / 2), y];
+        } else if (["ArrowLeft", "ArrowRight"].includes(direction)) {
+            rocket.coordinates = [x, y + (this.instanceNeedRockets.height / 2 - rocket.height / 2)];
+        }
         this.#allRocketsInstances.push(rocket);
         // console.log(this.#allRocketsInstances, direction);
     }

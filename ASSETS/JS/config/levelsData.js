@@ -11,11 +11,11 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 15000,
+        levelTime: 30000,
         level: 1,
     },
     {
-        levelTime: 5000,
+        levelTime: 3000,
         level: 1,
     },
     {
@@ -30,11 +30,11 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 15000,
+        levelTime: 30000,
         level: 2,
     },
     {
-        levelTime: 5000,
+        levelTime: 3000,
         level: 2,
     },
     {
@@ -49,11 +49,11 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 15000,
+        levelTime: 30000,
         level: 3,
     },
     {
-        levelTime: 5000,
+        levelTime: 3000,
         level: 3,
     },
     {
@@ -68,12 +68,12 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 15000,
+        levelTime: 30000,
         level: 4,
     },
     {
         end: true,
-        levelTime: 5000,
+        levelTime: 3000,
         level: 4,
     },
 ];

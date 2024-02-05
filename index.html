@@ -7,6 +7,12 @@
         <title>Space Limit</title>
         <audio id="audio1" src="./ASSETS/SOUNDS/08. Stormwind.mp3" type="audio/mpeg" autoplay></audio>
         <script type="module" src="./ASSETS/JS/index.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Turret+Road:wght@200;300;400;500;700;800&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="./ASSETS/CSS/style.css" />
         <link rel="stylesheet" href="./ASSETS/CSS/Canvas.css" />
         <link rel="stylesheet" href="./ASSETS/CSS/header.css" />
@@ -29,18 +35,32 @@
             </div>
         </header>
 
-        <main>
-            <div class="content-canvas">
-                <img id="background" src="./ASSETS/IMAGES/background.jpg" alt="background" />
-            </div>
-            <div class="startTime">
-                <section class="container-counter">
-                    <p id="levelCurrent"></p>
-                    <p id="startCounter">0</p>
-                    <p id="textLevel"></p>
-                </section>
-            </div>
-        </main>
+        <div style="display: flex">
+            <aside class="aside-main left" style="">
+                <h2>Ennemis</h2>
+            </aside>
+            <main>
+                <div class="content-canvas">
+                    <img id="background" src="./ASSETS/IMAGES/background.jpg" alt="background" />
+                </div>
+                <div class="startTime">
+                    <section class="container-counter">
+                        <p id="levelCurrent"></p>
+                        <p id="startCounter">0</p>
+                        <p id="textLevel"></p>
+                    </section>
+                </div>
+            </main>
+            <aside class="aside-main right" style="">
+                <h2>Player</h2>
+
+                <div>
+                    <div>💓💓💓</div>
+                    <div>💓💓</div>
+                    <div>💓</div>
+                </div>
+            </aside>
+        </div>
 
         <div class="overlay"></div>
 

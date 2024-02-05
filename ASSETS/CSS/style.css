@@ -4,6 +4,11 @@
     --widthCanvas: 0px;
 }
 
+body,
+html {
+    font-family: "Turret Road", sans-serif;
+}
+
 body {
     max-height: 100vh;
     max-width: 100%;
@@ -110,4 +115,22 @@ main {
 
 #textLevel {
     color: #fff;
+}
+
+.aside-main {
+    width: 100px;
+    outline: 2px solid black;
+
+    & > h2 {
+        font-size: 15px;
+        text-align: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 9px;
+    }
+}
+.right {
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+.left {
+    border-radius: var(--radius) 0 0 var(--radius);
 }
