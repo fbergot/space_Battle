@@ -8,9 +8,12 @@ class Rocket {
     #x;
     /** @private {number} #y */
     #y;
+    /** @private {number} #damage */
+    #damage;
 
     constructor(instanceNeedRocket, direction) {
         this.direction = direction;
+        this.managerPositionWeapons = new ManagerPositionWeapons(this, this.direction);
         this.instanceNeedRocket = instanceNeedRocket;
         this.utils = utilsInstance;
         this.canvas = Canvas;
@@ -23,7 +26,21 @@ class Rocket {
         this.ctx = this.canvas.ctx;
         this.#x = 0;
         this.#y = 0;
-        this.managerPositionWeapons = new ManagerPositionWeapons(this, this.direction);
+        this.#damage;
+    }
+
+    /**
+     * @returns {number}
+     */
+    get currentDamage() {
+        return this.#damage;
+    }
+
+    /**
+     * @param {number}
+     */
+    set currentDamage(value) {
+        this.#damage = value;
     }
 
     /**

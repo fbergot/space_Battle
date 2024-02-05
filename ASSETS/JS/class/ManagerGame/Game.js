@@ -2,7 +2,7 @@ import Canvas from "../ManagerCanvas/Canvas.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Player from "../ManagerPlayer/Player.js";
 import ManagerBloc from "../ManagerBloc/ManagerBlocs.js";
-import Collision from "../ManagerCollision/Collision.js";
+import { CollisionWeapons } from "../ManagerCollision/Collision.js";
 import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
 import GameParameters from "./GameParameters.js";
 import Bloc from "../ManagerBloc/Bloc.js";
@@ -12,9 +12,11 @@ class Game {
     constructor() {
         this.managerBlocInstance = new ManagerBloc();
         this.managerEnnemisInstance = new ManagerEnnemis();
+        this.playerInstance = new Player();
         this.gameParameters = new GameParameters(0, {
             managerBlocInstance: this.managerBlocInstance,
             managerEnnemisInstance: this.managerEnnemisInstance,
+            managerRocketInstance: this.playerInstance.managerRocketInstance,
         });
         this.canvas = Canvas;
         this.ctx = Canvas.ctx;
@@ -22,7 +24,6 @@ class Game {
         this.counterGame = null;
         this.utils = utilsInstance;
         this.managerCollisionInstance = null;
-        this.playerInstance = new Player();
         this.utils.$("#background").style.width = `${this.canvas.canvasWidth}px`;
         this.utils.$("#background").style.height = `${this.canvas.canvasHeight}px`;
         this.utils.setCSSVar("--widthCanvas", `${this.canvas.canvasWidth}px`);
@@ -36,11 +37,11 @@ class Game {
     initInstances(nbOfInstances, typeofInstance) {
         if (typeofInstance === "bloc") {
             this.managerBlocInstance.generation(nbOfInstances);
-            this.managerCollisionInstance = new Collision();
+            this.managerCollisionInstance = new CollisionWeapons();
         }
         if (typeofInstance === "ennemi") {
             this.managerEnnemisInstance.generation(nbOfInstances);
-            this.managerCollisionInstance = new Collision();
+            this.managerCollisionInstance = new CollisionWeapons();
         }
     }
 

@@ -2,7 +2,6 @@ import Canvas from "../ManagerCanvas/Canvas.js";
 import Game from "../ManagerGame/Game.js";
 import utilsInstance from "../UTILS/Utils.js";
 import { levelChoice } from "../../function/utilsFunctions.js";
-import GameParameters from "../ManagerGame/GameParameters.js";
 
 class ManagerLevel {
     /**
@@ -10,7 +9,6 @@ class ManagerLevel {
      * @param {Game} gameInstance
      */
     constructor(gameInstance, generator) {
-        this.GameParameters = GameParameters;
         this.levelChoice = levelChoice;
         this.utils = utilsInstance;
         this.generator = generator;

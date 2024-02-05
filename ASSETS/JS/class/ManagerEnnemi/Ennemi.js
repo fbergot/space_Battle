@@ -8,6 +8,8 @@ class Ennemi {
     #x;
     /** @private {number} #y */
     #y;
+    /** @private {number} #life */
+    #life;
 
     constructor() {
         this.utils = utilsInstance;
@@ -20,6 +22,7 @@ class Ennemi {
         this.ctx = this.canvas.ctx;
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(-10, -200);
+        this.#life;
     }
 
     /**
@@ -32,6 +35,20 @@ class Ennemi {
             xEnnMax: this.#x + this.widthAndHeight[0],
             yEnnMax: this.#y + this.widthAndHeight[1],
         };
+    }
+
+    /**
+     * @returns {number}
+     */
+    get currentLife() {
+        return this.#life;
+    }
+
+    /**
+     * @param {number}
+     */
+    set currentLife(value) {
+        this.#life = value;
     }
 
     /**

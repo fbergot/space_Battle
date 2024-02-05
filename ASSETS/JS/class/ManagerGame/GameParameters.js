@@ -9,7 +9,7 @@ class GameParameters {
      * @param {number} startLife
      * @param { { managerBlocInstance: Bloc, managerEnnemisInstance: Ennemi } } param1
      */
-    constructor(startLife, { managerBlocInstance, managerEnnemisInstance }) {
+    constructor(startLife, { managerBlocInstance, managerEnnemisInstance, managerRocketInstance }) {
         this.lifesPlayer = startLife;
         this.utils = utilsInstance;
         this.lifeHTML = this.utils.$("#collision");
@@ -31,6 +31,7 @@ class GameParameters {
                 this.lifeFunc.call(this, e);
                 managerBlocInstance.instancesPop(e.detail.ennemiIndex);
                 managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
+                managerRocketInstance.instancesPop(e.detail.rocketIndex);
                 this.ennemisFunc.call(this, e);
             },
             { once: false }

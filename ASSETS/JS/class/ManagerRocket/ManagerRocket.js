@@ -14,14 +14,14 @@ class ManagerRocket {
         this.utils.addEvListener("html", "keyup", (e) => {
             if (e.keyCode === 32) {
                 this.generation.call(this, this.instanceNeedRockets.direction);
-                console.log(this.#allRocketsInstances);
+                // console.log(this.#allRocketsInstances);
             }
         });
 
         this.#allRocketsInstances = [];
         document.addEventListener("rocketOut", (e) => {
             this.instancesPop.call(this, e.detail.rocketIndex);
-            console.log(this.#allRocketsInstances);
+            // console.log(this.#allRocketsInstances);
         });
     }
 

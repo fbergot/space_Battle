@@ -8,6 +8,8 @@ class Bloc {
     #x;
     /** @private {number} #y */
     #y;
+    /** @private {number} #life */
+    #life;
 
     constructor() {
         this.colors = ["#FFF", "#ADF", "blue", "#AAF", "#FFF", "red"];
@@ -23,6 +25,7 @@ class Bloc {
         this.#x = this.utils.randomMinMax(5, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(100, 500);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
+        this.#life;
     }
 
     /**
@@ -43,6 +46,20 @@ class Bloc {
         this.ctx.fillRect(this.#x, this.#y, this.width, this.height);
         // this.ctx.strokeRect(this.#x, this.#y, this.width, this.height);
         this.ctx.closePath();
+    }
+
+    /**
+     * @returns {number}
+     */
+    get currentLife() {
+        return this.#life;
+    }
+
+    /**
+     * @param {number}
+     */
+    set currentLife(value) {
+        this.#life = value;
     }
 
     /**

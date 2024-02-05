@@ -9,8 +9,10 @@ class Soucoupe {
     #x;
     /** @private {number} #y */
     #y;
-
+    /** @private {string} #direction */
     #direction;
+    /** @private {string} #life */
+    #life;
 
     constructor() {
         this.speedInstance = new Speed();
@@ -30,6 +32,21 @@ class Soucoupe {
         };
         this.#x = this.utils.randomMinMax(1, this.canvas.canvasWidth - 26.6);
         this.#y = this.utils.randomMinMax(1, this.canvas.canvasHeight - 26.6);
+        this.#life;
+    }
+
+    /**
+     * @returns {number}
+     */
+    get currentLife() {
+        return this.#life;
+    }
+
+    /**
+     * @param {number}
+     */
+    set currentLife(value) {
+        this.#life = value;
     }
 
     /**
