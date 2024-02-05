@@ -36,11 +36,11 @@ class Game {
     initInstances(nbOfInstances, typeofInstance) {
         if (typeofInstance === "bloc") {
             this.managerBlocInstance.generation(nbOfInstances);
-            this.managerCollisionInstance = new Collision(this);
+            this.managerCollisionInstance = new Collision();
         }
         if (typeofInstance === "ennemi") {
             this.managerEnnemisInstance.generation(nbOfInstances);
-            this.managerCollisionInstance = new Collision(this);
+            this.managerCollisionInstance = new Collision();
         }
     }
 
@@ -51,6 +51,7 @@ class Game {
         return {
             instancesBloc: this.managerBlocInstance.instances,
             instancesEnnemi: this.managerEnnemisInstance.instances,
+            allInstancesEnnemis: [...this.managerBlocInstance.instances, ...this.managerEnnemisInstance.instances],
         };
     }
 
@@ -75,16 +76,16 @@ class Game {
         if (typeEnnemis === "bloc") {
             this.managerBlocInstance.update();
             this.managerCollisionInstance.checkIfCollision(
-                this.playerInstance.newCoordinatesPlayer,
-                "instancesBloc"
+                this.playerInstance.managerRocketInstance.instances,
+                this.allInstances.instancesBloc
             );
         }
 
         if (typeEnnemis === "soucoupe") {
             this.managerEnnemisInstance.update(this.playerInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
-                this.playerInstance.newCoordinatesPlayer,
-                "instancesEnnemi"
+                this.playerInstance.managerRocketInstance.instances,
+                this.allInstances.instancesEnnemi
             );
         }
 

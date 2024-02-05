@@ -14,6 +14,8 @@ class Rocket {
         this.instanceNeedRocket = instanceNeedRocket;
         this.utils = utilsInstance;
         this.canvas = Canvas;
+        this.width;
+        this.height;
         this.widthAndHeightDic = {
             UpDown: [25, 70],
             LeftRight: [70, 25],
@@ -29,10 +31,10 @@ class Rocket {
      */
     get coordinatesWithWidthAndHeight() {
         return {
-            xEnn: this.#x,
-            yEnn: this.#y,
-            xEnnMax: this.#x + this.widthAndHeight[0],
-            yEnnMax: this.#y + this.widthAndHeight[1],
+            x: this.#x,
+            y: this.#y,
+            xMax: this.#x + this.width,
+            yMax: this.#y + this.height,
         };
     }
 
@@ -47,12 +49,6 @@ class Rocket {
      * @param {[x: number, y: number]}
      */
     set coordinates(coordinatesXY) {
-        [this.#x, this.#y] = coordinatesXY;
-    }
-    /**
-     * @param {ManagerRocket}
-     */
-    set managerRocketInstance(instance) {
         [this.#x, this.#y] = coordinatesXY;
     }
 
