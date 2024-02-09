@@ -28,11 +28,25 @@ class GameParameters {
         document.addEventListener(
             "collision",
             (e) => {
-                this.lifeFunc.call(this, e);
-                managerBlocInstance.instancesPop(e.detail.ennemiIndex);
-                managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
                 managerRocketInstance.instancesPop(e.detail.rocketIndex);
-                this.ennemisFunc.call(this, e);
+                this.lifeFunc.call(this, e);
+                if (e.detail.typeOfEnnemi === "bloc") {
+                    const currentBloc = managerBlocInstance.instances[e.detail.ennemiIndex];
+                    currentBloc.life = currentBloc.life - e.detail.rocketDamage;
+                    if (currentBloc.life <= 0) {
+                        managerBlocInstance.instancesPop(e.detail.ennemiIndex);
+                        this.ennemisFunc.call(this, e);
+                    }
+                }
+
+                if (["soucoupe", "fusee"].includes(e.detail.typeOfEnnemi)) {
+                    const currentEnnemi = managerEnnemisInstance.instances[e.detail.ennemiIndex];
+                    currentEnnemi.life = currentEnnemi.life - e.detail.rocketDamage;
+                    if (currentEnnemi.life <= 0) {
+                        managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
+                        this.ennemisFunc.call(this, e);
+                    }
+                }
             },
             { once: false }
         );

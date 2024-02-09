@@ -33,22 +33,35 @@ class ManagerEnnemis {
     }
 
     /**
+     * @param {Ennemi} instance
+     * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}}}} dataCurrentLevel
+     */
+    createAndInitParamsInstance(Ennemi, dataCurrentLevel) {
+        const ennemiInstance = new Ennemi(dataCurrentLevel.ennemis.type);
+        ennemiInstance.life = dataCurrentLevel.ennemis.life;
+        return ennemiInstance;
+    }
+
+    /**
      * Génère les ennemis
      * @param {number} nbOfInstances
      */
-    generation(nbOfInstances) {
+    generation(dataCurrentLevel) {
         /**
          * @param {number} nbIterations
          * @returns {void}
          */
         const loopRecursive = (nbIterations = 0) => {
-            if (nbIterations < nbOfInstances) {
-                this.#allEnnemisInstances.push(new Ennemi());
+            if (nbIterations < dataCurrentLevel.ennemis.nb) {
+                const ennemiInstance = this.createAndInitParamsInstance(Ennemi, dataCurrentLevel);
+                this.#allEnnemisInstances.push(ennemiInstance);
+
                 loopRecursive(++nbIterations);
             }
             return;
         };
         loopRecursive();
+        console.log(this.#allEnnemisInstances);
     }
 
     /**

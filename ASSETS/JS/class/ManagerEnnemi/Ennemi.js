@@ -11,12 +11,12 @@ class Ennemi {
     /** @private {number} #life */
     #life;
 
-    constructor() {
+    constructor(type) {
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
         this.speedInstance.valueLevel = this.utils.randomMinMax(2, 4);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
-        this.image = this.utils.makeImage("ennemis", "soucoupe");
+        this.image = this.utils.makeImage("ennemis", type);
         this.widthAndHeight = [100, 54];
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
@@ -40,14 +40,14 @@ class Ennemi {
     /**
      * @returns {number}
      */
-    get currentLife() {
+    get life() {
         return this.#life;
     }
 
     /**
      * @param {number}
      */
-    set currentLife(value) {
+    set life(value) {
         this.#life = value;
     }
 

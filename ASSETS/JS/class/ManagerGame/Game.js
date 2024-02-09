@@ -34,13 +34,16 @@ class Game {
      * @param {number} nbOfInstances
      * @param {'bloc' | 'ennemi'} typeofInstance
      */
-    initInstances(nbOfInstances, typeofInstance) {
-        if (typeofInstance === "bloc") {
-            this.managerBlocInstance.generation(nbOfInstances);
+    initInstances(dataCurrentLevel) {
+        // this.playerInstance.managerRocketInstance.level = dataCurrentLevel.level;
+        this.playerInstance.managerRocketInstance.currentDamage = dataCurrentLevel.player.rockets.damage;
+
+        if (dataCurrentLevel.ennemis.type === "bloc") {
+            this.managerBlocInstance.generation(dataCurrentLevel);
             this.managerCollisionInstance = new CollisionWeapons();
         }
-        if (typeofInstance === "ennemi") {
-            this.managerEnnemisInstance.generation(nbOfInstances);
+        if (["soucoupe", "fusee"].includes(dataCurrentLevel.ennemis.type)) {
+            this.managerEnnemisInstance.generation(dataCurrentLevel);
             this.managerCollisionInstance = new CollisionWeapons();
         }
     }
@@ -78,15 +81,17 @@ class Game {
             this.managerBlocInstance.update();
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.managerRocketInstance.instances,
-                this.allInstances.instancesBloc
+                this.allInstances.instancesBloc,
+                typeEnnemis
             );
         }
 
-        if (typeEnnemis === "soucoupe") {
+        if (["soucoupe", "fusee"].includes(typeEnnemis)) {
             this.managerEnnemisInstance.update(this.playerInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.managerRocketInstance.instances,
-                this.allInstances.instancesEnnemi
+                this.allInstances.instancesEnnemi,
+                typeEnnemis
             );
         }
 

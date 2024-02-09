@@ -51,14 +51,14 @@ class Bloc {
     /**
      * @returns {number}
      */
-    get currentLife() {
+    get life() {
         return this.#life;
     }
 
     /**
      * @param {number}
      */
-    set currentLife(value) {
+    set life(value) {
         this.#life = value;
     }
 

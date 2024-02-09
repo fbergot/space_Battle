@@ -31,28 +31,40 @@ class ManagerBloc {
      * @param {number} index
      */
     instancesPop(index) {
-        this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => {
-            return i != index;
-        });
+        this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => i != index);
+    }
+
+    /**
+     *
+     * @param {Bloc} instance
+     * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}}}} dataCurrentLevel
+     */
+    initParametersInstance(Bloc, dataCurrentLevel) {
+        const blocInstance = new Bloc();
+        blocInstance.life = dataCurrentLevel.ennemis.life;
+        return blocInstance;
     }
 
     /**
      * Génère les blocs
      * @param {number} nbOfInstances
      */
-    generation(nbOfInstances) {
+    generation(dataCurrentLevel) {
         /**
          * @param {number} nbIterations
          * @returns {void}
          */
         const loopRecursive = (nbIterations = 0) => {
-            if (nbIterations < nbOfInstances) {
-                this.#allBlocsInstances.push(new Bloc());
+            if (nbIterations < dataCurrentLevel.ennemis.nb) {
+                const blocInstance = this.initParametersInstance(Bloc, dataCurrentLevel);
+                this.#allBlocsInstances.push(blocInstance);
+
                 loopRecursive(++nbIterations);
             }
             return;
         };
         loopRecursive();
+        console.log(this.#allBlocsInstances);
     }
 
     /**

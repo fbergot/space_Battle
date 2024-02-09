@@ -7,22 +7,37 @@ class ManagerRocket {
      * @private
      */
     #allRocketsInstances = [];
+    #currentDamage;
 
     constructor(instanceNeedRockets) {
         this.instanceNeedRockets = instanceNeedRockets;
         this.utils = utils;
+        this.currentLevel;
+        this.#currentDamage;
         this.utils.addEvListener("html", "keyup", (e) => {
             if (e.keyCode === 32) {
                 this.generation.call(this, this.instanceNeedRockets.direction);
-                // console.log(this.#allRocketsInstances);
             }
         });
 
         this.#allRocketsInstances = [];
         document.addEventListener("rocketOut", (e) => {
             this.instancesPop.call(this, e.detail.rocketIndex);
-            // console.log(this.#allRocketsInstances);
         });
+    }
+
+    /**
+     * @returns {number}
+     */
+    get level() {
+        return this.currentLevel;
+    }
+
+    /**
+     * @param {number} value
+     */
+    set level(value) {
+        this.currentLevel = value;
     }
 
     /**
@@ -49,6 +64,29 @@ class ManagerRocket {
     }
 
     /**
+     * @param {number} value
+     */
+    set currentDamage(value) {
+        this.#currentDamage = value;
+    }
+
+    /**
+     * @returns {number}
+     */
+    get currentDamage() {
+        return this.#currentDamage;
+    }
+
+    /**
+     *
+     * @param {Bloc} instance
+     * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}}}} dataCurrentLevel
+     */
+    initParametersInstance(instance, dataCurrentLevel) {
+        instance.currentDamage = dataCurrentLevel.player.rockets.damage;
+    }
+
+    /**
      * Génère les Rockets
      * @param {Event} e
      */
@@ -60,6 +98,7 @@ class ManagerRocket {
         } else if (["ArrowLeft", "ArrowRight"].includes(direction)) {
             rocket.coordinates = [x, y + (this.instanceNeedRockets.height / 2 - rocket.height / 2)];
         }
+        rocket.currentDamage = this.currentDamage;
         this.#allRocketsInstances.push(rocket);
         // console.log(this.#allRocketsInstances, direction);
     }

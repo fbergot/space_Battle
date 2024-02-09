@@ -70,13 +70,6 @@ class Soucoupe {
     }
 
     /**
-     * @returns {[x: number, y: number]}
-     */
-    get coordinates() {
-        return [this.#x, this.#y];
-    }
-
-    /**
      * @returns {string}
      */
     get direction() {
@@ -87,6 +80,13 @@ class Soucoupe {
      */
     set direction(value) {
         this.#direction = value;
+    }
+
+    /**
+     * @returns {[x: number, y: number]}
+     */
+    get coordinates() {
+        return [this.#x, this.#y];
     }
 
     /**
