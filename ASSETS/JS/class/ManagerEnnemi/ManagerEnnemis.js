@@ -39,6 +39,7 @@ class ManagerEnnemis {
     createAndInitParamsInstance(Ennemi, dataCurrentLevel) {
         const ennemiInstance = new Ennemi(dataCurrentLevel.ennemis.type);
         ennemiInstance.life = dataCurrentLevel.ennemis.life;
+        ennemiInstance.widthAndHeight = dataCurrentLevel.ennemis.widthAndHeight;
         return ennemiInstance;
     }
 

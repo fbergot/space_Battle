@@ -19,48 +19,48 @@ class ManagerLevel {
         this.currentTimeEndLevel;
         this.utils.startTimerGame(4, 1000, false);
         this.arrLevelsFunc = [
-            (gameInstance, index, dataCurrentLevel) => {
+            (gameInstance, dataCurrentLevel) => {
                 window.clearInterval(this.utils.idSetInterval);
                 gameInstance.initInstances(dataCurrentLevel);
                 gameInstance.renderLoop(dataCurrentLevel.ennemis.type);
             },
-            (gameInstance, index) => {
+            (gameInstance) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
             },
-            (gameInstance, index, dataCurrentLevel) => {
+            (gameInstance, dataCurrentLevel) => {
                 window.clearInterval(this.utils.idSetInterval);
                 gameInstance.initInstances(dataCurrentLevel);
                 gameInstance.renderLoop(dataCurrentLevel.ennemis.type);
             },
-            (gameInstance, index) => {
+            (gameInstance) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
             },
-            (gameInstance, index, dataCurrentLevel) => {
+            (gameInstance, dataCurrentLevel) => {
                 window.clearInterval(this.utils.idSetInterval);
                 gameInstance.initInstances(dataCurrentLevel);
                 gameInstance.renderLoop(dataCurrentLevel.ennemis.type);
             },
-            (gameInstance, index) => {
+            (gameInstance) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
             },
-            (gameInstance, index, dataCurrentLevel) => {
+            (gameInstance, dataCurrentLevel) => {
                 window.clearInterval(this.utils.idSetInterval);
                 gameInstance.initInstances(dataCurrentLevel);
                 gameInstance.renderLoop(dataCurrentLevel.ennemis.type);
             },
-            (gameInstance, index) => {
+            (gameInstance) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
             },
-            (gameInstance, index, dataCurrentLevel) => {
+            (gameInstance, dataCurrentLevel) => {
                 window.clearInterval(this.utils.idSetInterval);
                 gameInstance.initInstances(dataCurrentLevel);
                 gameInstance.renderLoop(dataCurrentLevel.ennemis.type);
             },
-            (gameInstance, index) => {
+            (gameInstance) => {
                 this.canvas.ctx.clearRect(0, 0, this.canvas.canvasWidth, this.canvas.canvasHeight);
                 gameInstance.stopRenderLoop();
             },
@@ -74,7 +74,7 @@ class ManagerLevel {
      */
     timer(time) {
         window.setTimeout(() => {
-            document.dispatchEvent(this.utils.eventStartGame);
+            this.utils.$("html").dispatchEvent(this.utils.eventStartGame);
         }, time);
 
         this.currentTimeEndLevel = time / 1000;
@@ -95,7 +95,7 @@ class ManagerLevel {
      */
     loadLevel(levelIndex) {
         const { level, levelTime, ennemis } = this.levelChoice(levelIndex);
-        this.arrLevelsFunc[levelIndex](this.gameInstance, levelIndex, this.levelChoice(levelIndex));
+        this.arrLevelsFunc[levelIndex](this.gameInstance, this.levelChoice(levelIndex));
 
         if (levelIndex % 2 !== 0) this.utils.startTimerGame(levelTime / 1000, 1000, true);
         else this.utils.$("#level").innerText = level;
@@ -103,7 +103,7 @@ class ManagerLevel {
         this.currentTimeLevel = levelTime;
         this.timer(this.currentTimeLevel);
 
-        document.dispatchEvent(
+        this.utils.$("html").dispatchEvent(
             new CustomEvent("setEnnemis", {
                 detail: {
                     nbEnnemis: ennemis?.nb || 0,

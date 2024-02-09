@@ -4,7 +4,7 @@ import ManagerLevel from "./class/ManagerLevel/Level.js";
 import { levelsData } from "./config/levelsData.js";
 
 export const gameInstance = new Game();
-const utilsInstance = UTILS;
+const utils = UTILS;
 
 /**
  * Fonction génératrice (gère les levels du jeu)
@@ -23,9 +23,9 @@ const initialLevel = 0;
 const generator = levelMove(initialLevel, levelsTot);
 const managerLevelInstance = new ManagerLevel(gameInstance, generator);
 
-document.addEventListener("gamestart", (e) => {
+utils.addEvListener("html", "gamestart", (e) => {
     generator.next();
 });
 
-const audio = document.querySelector("#audio1");
+const audio = utils.$("#audio1");
 audio.volume = 0.1;

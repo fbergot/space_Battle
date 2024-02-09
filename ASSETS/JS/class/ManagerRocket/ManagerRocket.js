@@ -11,6 +11,7 @@ class ManagerRocket {
 
     constructor(instanceNeedRockets) {
         this.instanceNeedRockets = instanceNeedRockets;
+        this.#allRocketsInstances = [];
         this.utils = utils;
         this.currentLevel;
         this.#currentDamage;
@@ -20,8 +21,7 @@ class ManagerRocket {
             }
         });
 
-        this.#allRocketsInstances = [];
-        document.addEventListener("rocketOut", (e) => {
+        this.utils.addEvListener("html", "rocketOut", (e) => {
             this.instancesPop.call(this, e.detail.rocketIndex);
         });
     }
@@ -100,7 +100,6 @@ class ManagerRocket {
         }
         rocket.currentDamage = this.currentDamage;
         this.#allRocketsInstances.push(rocket);
-        // console.log(this.#allRocketsInstances, direction);
     }
 
     /**

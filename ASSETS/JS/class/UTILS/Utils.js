@@ -3,7 +3,7 @@ import { levelChoice } from "../../function/utilsFunctions.js";
 class Utils {
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
-        this.$$ = (selector) => document.querySelectorAll(selector);
+        this.$$ = (selector) => ment.querySelectorAll(selector);
         this.eventStartGame = new CustomEvent("gamestart");
     }
 
@@ -41,7 +41,7 @@ class Utils {
      * @return {number} integer random in the range
      */
     randomMinMax(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+        return Math.round(Math.random() * (max - min + 1) + min);
     }
 
     /**
@@ -103,6 +103,16 @@ class Utils {
         return image;
     }
 
+    displayEnnemis(nbEnnemis) {
+        this.$(".allEnnemis").innerHTML = "";
+
+        let allEnnemis = "";
+        for (let i = 0; i < nbEnnemis; i++) {
+            allEnnemis = allEnnemis.concat(`<div class='iconEnnemi'>👽</div>`);
+        }
+        this.$(".allEnnemis").innerHTML = allEnnemis;
+    }
+
     /**
      *
      * @param {number} nbInit seconde
@@ -128,7 +138,7 @@ class Utils {
                 window.clearInterval(this.idSetInterval);
                 if (!reinit) this.$(".startTime").style.display = "none";
                 else this.$(".startTime").style.display = "block";
-                document.dispatchEvent(this.eventStartGame);
+                this.$("html").dispatchEvent(this.eventStartGame);
             }
         }, time);
     }

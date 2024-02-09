@@ -165,7 +165,7 @@ export class ManagerPositionWeapons {
     }
 
     /**
-     * UPDATE LES COORDs of #direction
+     * UPDATE LES COORDS of #direction
      * @description {On vient get les points X, Y de l'instance injecté dans le constructor}
      */
     updateCoordinates([x, y], index) {
@@ -199,7 +199,7 @@ export class ManagerPositionWeapons {
     limiteArea([x, y], index) {
         // prettier-ignore
         if ((y <= 0 || y >= this.canvas.canvasHeight) || (x <= 0 || x >= this.canvas.canvasWidth)) {
-            document.dispatchEvent(
+            this.utils.$("html").dispatchEvent(
                 new CustomEvent("rocketOut", {
                     detail: {
                         rocketIndex: index,

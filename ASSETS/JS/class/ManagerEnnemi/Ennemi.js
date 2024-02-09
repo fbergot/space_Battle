@@ -2,6 +2,7 @@ import Canvas from "../ManagerCanvas/Canvas.js";
 import { ManagerPosition } from "../ManagerPosition/Position.js";
 import utilsInstance from "../UTILS/Utils.js";
 import Speed from "../ManagerSpeed/Speed.js";
+import ManagerRocket from "../ManagerRocket/ManagerRocket.js";
 
 class Ennemi {
     /** @private {number} #x */
@@ -14,10 +15,10 @@ class Ennemi {
     constructor(type) {
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
-        this.speedInstance.valueLevel = this.utils.randomMinMax(2, 4);
+        this.speedInstance.valueLevel = this.utils.randomMinMax(0.5, 3.5);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
         this.image = this.utils.makeImage("ennemis", type);
-        this.widthAndHeight = [100, 54];
+        this.widthAndHeight;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);

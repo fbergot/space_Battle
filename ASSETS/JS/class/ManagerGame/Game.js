@@ -35,7 +35,7 @@ class Game {
      * @param {'bloc' | 'ennemi'} typeofInstance
      */
     initInstances(dataCurrentLevel) {
-        // this.playerInstance.managerRocketInstance.level = dataCurrentLevel.level;
+        // on actualise les dommage des rockets selon le level
         this.playerInstance.managerRocketInstance.currentDamage = dataCurrentLevel.player.rockets.damage;
 
         if (dataCurrentLevel.ennemis.type === "bloc") {

@@ -16,16 +16,19 @@ class GameParameters {
         this.lifeHTML.innerText = this.lifesPlayer;
         this.ennemisHTML = this.utils.$("#ennemis");
 
-        document.addEventListener(
+        this.utils.addEvListener(
+            "html",
             "setEnnemis",
             (e) => {
                 this.ennemisHTML.innerText = e.detail.nbEnnemis;
                 this.nbEnnemisInLive = e.detail.nbEnnemis;
+                this.utils.displayEnnemis(e.detail.nbEnnemis);
             },
             { once: false }
         );
 
-        document.addEventListener(
+        this.utils.addEvListener(
+            "html",
             "collision",
             (e) => {
                 managerRocketInstance.instancesPop(e.detail.rocketIndex);
@@ -59,6 +62,7 @@ class GameParameters {
     ennemisFunc(e) {
         --this.nbEnnemisInLive;
         this.ennemisHTML.innerText = this.nbEnnemisInLive;
+        this.utils.displayEnnemis(this.nbEnnemisInLive);
     }
 
     /**

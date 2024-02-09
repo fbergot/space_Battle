@@ -1,8 +1,11 @@
+import utilsInstance from "../UTILS/Utils.js";
+
 export class CollisionWeapons {
     #weaponsInstCoordAndWidthHeight;
     #ennemiInstCoordAndWidthHeight;
 
     constructor() {
+        this.utils = utilsInstance;
         this.#weaponsInstCoordAndWidthHeight = [];
         this.#ennemiInstCoordAndWidthHeight = [];
     }
@@ -43,7 +46,7 @@ export class CollisionWeapons {
                         rocketDamage: damage,
                         typeOfEnnemi,
                     });
-                    document.dispatchEvent(
+                    this.utils.$("html").dispatchEvent(
                         new CustomEvent("collision", {
                             detail: {
                                 ennemiIndex: indexEnnemi,
