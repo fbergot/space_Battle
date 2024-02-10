@@ -82,6 +82,7 @@ class Rocket {
      */
     update(index) {
         this.managerPositionWeapons.updateCoordinates(this.coordinates, index);
+        console.log(this.coordinates);
         const direction = this.direction;
         const imgName = `rocket_${direction.replace("Arrow", "").toUpperCase()}`;
         this.image = this.utils.makeImage("rocket", imgName);
@@ -91,6 +92,7 @@ class Rocket {
 
     /** Function for draw the image on the canvas */
     draw() {
+        // console.log({ img: this.image, x: this.#x, y: this.#y, width: this.width, heigth: this.height });
         this.ctx.drawImage(this.image, this.#x, this.#y, this.width, this.height);
     }
 }

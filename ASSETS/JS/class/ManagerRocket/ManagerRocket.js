@@ -1,3 +1,4 @@
+import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import utils from "./../UTILS/Utils.js";
 import Rocket from "./Rocket.js";
 
@@ -15,11 +16,21 @@ class ManagerRocket {
         this.utils = utils;
         this.currentLevel;
         this.#currentDamage;
-        this.utils.addEvListener("html", "keyup", (e) => {
-            if (e.keyCode === 32) {
-                this.generation.call(this, this.instanceNeedRockets.direction);
-            }
-        });
+        if (instanceNeedRockets.constructor.name !== "Ennemi") {
+            this.utils.addEvListener("html", "keyup", (e) => {
+                if (e.keyCode === 32) {
+                    this.generation.call(this, this.instanceNeedRockets.direction);
+                }
+            });
+        } else {
+            this.utils.addEvListener("html", "keyup", (e) => {
+                if (e.keyCode === 96) {
+                    const valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+                    const direction = this.utils.getRandomElementFromArr(valuesDirections);
+                    this.generation.call(this, direction);
+                }
+            });
+        }
 
         this.utils.addEvListener("html", "rocketOut", (e) => {
             this.instancesPop.call(this, e.detail.rocketIndex);

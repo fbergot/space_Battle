@@ -17,8 +17,11 @@ class Ennemi {
         this.speedInstance = new Speed();
         this.speedInstance.valueLevel = this.utils.randomMinMax(0.5, 3.5);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
+        this.managerRocketInstance = new ManagerRocket(this);
         this.image = this.utils.makeImage("ennemis", type);
         this.widthAndHeight;
+        this.width = 100;
+        this.height = 54;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
@@ -71,6 +74,7 @@ class Ennemi {
      */
     update(coordinatesPlayer) {
         this.managerPositionInstance.updateCoordinatesAuto(coordinatesPlayer);
+        this.managerRocketInstance.update();
         this.draw();
     }
 
