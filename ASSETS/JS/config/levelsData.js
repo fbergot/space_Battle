@@ -1,7 +1,7 @@
 export const levelsData = [
     {
         ennemis: {
-            nb: 2,
+            nb: 5,
             type: "fusee",
             life: 10,
             widthAndHeight: [71, 98],

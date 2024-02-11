@@ -1,11 +1,9 @@
 import Bloc from "../ManagerBloc/Bloc.js";
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
 import utilsInstance from "../UTILS/Utils.js";
-import { levelsData } from "../../config/levelsData.js";
 
 class GameParameters {
     /**
-     *
      * @param {number} startLife
      * @param { { managerBlocInstance: Bloc, managerEnnemisInstance: Ennemi } } param1
      */
@@ -33,6 +31,7 @@ class GameParameters {
             (e) => {
                 managerRocketInstance.instancesPop(e.detail.rocketIndex);
                 this.lifeFunc.call(this, e);
+
                 if (e.detail.typeOfEnnemi === "bloc") {
                     const currentBloc = managerBlocInstance.instances[e.detail.ennemiIndex];
                     currentBloc.life = currentBloc.life - e.detail.rocketDamage;

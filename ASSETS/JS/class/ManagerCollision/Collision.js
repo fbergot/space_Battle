@@ -9,6 +9,7 @@ export class CollisionWeapons {
         this.#weaponsInstCoordAndWidthHeight = [];
         this.#ennemiInstCoordAndWidthHeight = [];
     }
+    bb;
 
     /**
      * Prépare les data pour analyse des collisions
@@ -46,6 +47,7 @@ export class CollisionWeapons {
                         rocketDamage: damage,
                         typeOfEnnemi,
                     });
+
                     this.utils.$("html").dispatchEvent(
                         new CustomEvent("collision", {
                             detail: {

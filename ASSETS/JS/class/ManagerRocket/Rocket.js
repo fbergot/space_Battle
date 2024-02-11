@@ -17,12 +17,9 @@ class Rocket {
         this.instanceNeedRocket = instanceNeedRocket;
         this.utils = utilsInstance;
         this.canvas = Canvas;
-        this.widthAndHeightDic = {
-            UpDown: [25, 70],
-            LeftRight: [70, 25],
-        };
-        this.width = this.defineWidthAndHeight(this.direction, this.widthAndHeightDic)[0];
-        this.height = this.defineWidthAndHeight(this.direction, this.widthAndHeightDic)[1];
+        this.widthAndHeightDic = [25, 70];
+        this.width = this.widthAndHeightDic[0];
+        this.height = this.widthAndHeightDic[1];
         this.ctx = this.canvas.ctx;
         this.#x = 0;
         this.#y = 0;
@@ -69,24 +66,12 @@ class Rocket {
         [this.#x, this.#y] = coordinatesXY;
     }
 
-    defineWidthAndHeight(direction, widthAndHeightDic) {
-        const [width, height] = ["ArrowLeft", "ArrowRight"].includes(direction)
-            ? widthAndHeightDic.LeftRight
-            : widthAndHeightDic.UpDown;
-
-        return [width, height];
-    }
-
     /**
      * Update position and draw on canvas player
      */
     update(index) {
         this.managerPositionWeapons.updateCoordinates(this.coordinates, index);
-        console.log(this.coordinates);
-        const direction = this.direction;
-        const imgName = `rocket_${direction.replace("Arrow", "").toUpperCase()}`;
-        this.image = this.utils.makeImage("rocket", imgName);
-        [this.width, this.height] = this.defineWidthAndHeight(direction, this.widthAndHeightDic);
+        this.image = this.utils.makeImage("rocket", `rocket_UP`);
         this.draw();
     }
 

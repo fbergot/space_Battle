@@ -1,4 +1,6 @@
 import Ennemi from "../ManagerEnnemi/Ennemi.js";
+import Rocket from "../ManagerRocket/Rocket.js";
+import utilsInstance from "../UTILS/Utils.js";
 
 class ManagerEnnemis {
     /**
@@ -29,12 +31,13 @@ class ManagerEnnemis {
      * @param {number} index
      */
     instancesPop(index) {
-        this.#allEnnemisInstances = this.#allEnnemisInstances.filter((_, i) => i != index);
+        this.#allEnnemisInstances = this.#allEnnemisInstances.filter((_, i) => i !== index);
     }
 
     /**
-     * @param {Ennemi} instance
+     * @param {Ennemi} Ennemi
      * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}}}} dataCurrentLevel
+     * @return {Ennemi}
      */
     createAndInitParamsInstance(Ennemi, dataCurrentLevel) {
         const ennemiInstance = new Ennemi(dataCurrentLevel.ennemis.type);
@@ -70,9 +73,10 @@ class ManagerEnnemis {
      * @param {[x: number, y: number]} coordinatesPlayer
      */
     update(coordinatesPlayer) {
-        this.#allEnnemisInstances.forEach((ennemiInstance) => {
-            ennemiInstance.update(coordinatesPlayer);
-        }, this);
+        this.#allEnnemisInstances.forEach(
+            (ennemiInst, index) => ennemiInst.update(coordinatesPlayer, index),
+            this
+        );
     }
 }
 

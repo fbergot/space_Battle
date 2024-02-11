@@ -1,5 +1,3 @@
-import { levelChoice } from "../../function/utilsFunctions.js";
-
 class Utils {
     constructor() {
         this.$ = (selector) => document.querySelector(selector);
@@ -10,11 +8,10 @@ class Utils {
     /**
      * @param {string} word
      * @param {number} nb
-     * @returns { string }
+     * @returns {string}
      */
     plural(word, nb) {
-        const Word = nb > 1 ? `${word}s` : word;
-        return Word;
+        return nb > 1 ? `${word}s` : word;
     }
 
     /**
@@ -24,7 +21,7 @@ class Utils {
     setCSSVar(varCSS, value) {
         const root = this.$(":root");
         root.style.setProperty(varCSS, value);
-        var rs = getComputedStyle(root);
+        getComputedStyle(root);
     }
 
     /**
@@ -103,6 +100,9 @@ class Utils {
         return image;
     }
 
+    /**
+     * @param {number} nbEnnemis
+     */
     displayEnnemis(nbEnnemis) {
         this.$(".allEnnemis").innerHTML = "";
 

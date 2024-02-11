@@ -23,15 +23,12 @@ class Soucoupe {
         this.image = null;
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
-        this.widthAndHeightDic = {
-            UpDown: [70, 100],
-            LeftRight: [100, 70],
-        };
+        this.widthAndHeightDic = [70, 100];
         this.#direction;
-        this.width = this.defineWidthAndHeight(this.direction, this.widthAndHeightDic)[0];
-        this.height = this.defineWidthAndHeight(this.direction, this.widthAndHeightDic)[1];
+        this.width = this.widthAndHeightDic[0];
+        this.height = this.widthAndHeightDic[1];
         this.#x = this.utils.randomMinMax(1, this.canvas.canvasWidth - 26.6);
-        this.#y = this.utils.randomMinMax(1, this.canvas.canvasHeight - 26.6);
+        this.#y = this.canvas.canvasHeight - this.widthAndHeightDic[1] - 10;
         this.#life;
     }
 
@@ -96,23 +93,12 @@ class Soucoupe {
         [this.#x, this.#y] = coordinatesXY;
     }
 
-    defineWidthAndHeight(direction, widthAndHeightDic) {
-        const [width, height] = ["ArrowLeft", "ArrowRight"].includes(direction)
-            ? widthAndHeightDic.LeftRight
-            : widthAndHeightDic.UpDown;
-
-        return [width, height];
-    }
-
     /**
      * Update position and draw on canvas player
      */
     update() {
         this.PositionInstance.updateCoordinates();
-        this.direction = this.PositionInstance.direction;
-        const imgName = `player_${this.direction.replace("Arrow", "").toUpperCase()}`;
-        this.image = this.utils.makeImage("player", imgName);
-        [this.width, this.height] = this.defineWidthAndHeight(this.direction, this.widthAndHeightDic);
+        this.image = this.utils.makeImage("player", `player_UP`);
         this.managerRocketInstance.update();
         this.draw();
     }

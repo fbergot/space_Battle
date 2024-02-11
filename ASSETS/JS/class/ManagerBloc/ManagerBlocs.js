@@ -31,13 +31,13 @@ class ManagerBloc {
      * @param {number} index
      */
     instancesPop(index) {
-        this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => i != index);
+        this.#allBlocsInstances = this.#allBlocsInstances.filter((bloc, i) => i !== index);
     }
 
     /**
      *
      * @param {Bloc} instance
-     * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}}}} dataCurrentLevel
+     * @param {{ ennemis: {nb: number, type: string, life: number}, player: {rockets: {nb : number, damage: number}} }} dataCurrentLevel
      */
     initParametersInstance(Bloc, dataCurrentLevel) {
         const blocInstance = new Bloc();

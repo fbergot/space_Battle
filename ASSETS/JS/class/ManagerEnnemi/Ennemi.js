@@ -13,17 +13,17 @@ class Ennemi {
     #life;
 
     constructor(type) {
+        this.canvas = Canvas;
+        this.ctx = this.canvas.ctx;
         this.utils = utilsInstance;
         this.speedInstance = new Speed();
         this.speedInstance.valueLevel = this.utils.randomMinMax(0.5, 3.5);
         this.managerPositionInstance = new ManagerPosition(this, this.speedInstance);
-        this.managerRocketInstance = new ManagerRocket(this);
+        // this.managerRocketInstance = new ManagerRocket(this);
         this.image = this.utils.makeImage("ennemis", type);
         this.widthAndHeight;
         this.width = 100;
         this.height = 54;
-        this.canvas = Canvas;
-        this.ctx = this.canvas.ctx;
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(-10, -200);
         this.#life;
@@ -72,9 +72,9 @@ class Ennemi {
     /**
      * @param {[x: number, y: number]} coordinatesPlayer
      */
-    update(coordinatesPlayer) {
-        this.managerPositionInstance.updateCoordinatesAuto(coordinatesPlayer);
-        this.managerRocketInstance.update();
+    update(coordinatesPlayer, index) {
+        this.managerPositionInstance.updateCoordinatesAuto(coordinatesPlayer, index);
+        // this.managerRocketInstance.update();
         this.draw();
     }
 
