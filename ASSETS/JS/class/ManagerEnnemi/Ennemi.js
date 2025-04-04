@@ -11,6 +11,8 @@ class Ennemi {
     #y;
     /** @private {number} #life */
     #life;
+    /** @private {number} #damage */
+    #damage;
 
     constructor(type) {
         this.canvas = Canvas;
@@ -27,6 +29,7 @@ class Ennemi {
         this.#x = this.utils.randomMinMax(-10, this.canvas.canvasWidth);
         this.#y = this.utils.randomMinMax(-10, -200);
         this.#life;
+        this.#damage;
     }
 
     /**

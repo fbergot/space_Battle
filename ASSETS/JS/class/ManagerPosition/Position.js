@@ -23,9 +23,7 @@ export class ManagerPosition {
         this.canvas = Canvas;
         this.utils.addEvListener("html", "keydown", (e) => this.changeDirection.call(this, e));
         this.valuesDirections = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-        this.#direction = this.utils.getRandomElementFromArr(
-            this.valuesDirections.filter((_, index) => index < 2)
-        );
+        this.#direction = null;
     }
 
     /**

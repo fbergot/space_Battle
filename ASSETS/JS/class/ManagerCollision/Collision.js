@@ -3,13 +3,14 @@ import utilsInstance from "../UTILS/Utils.js";
 export class CollisionWeapons {
     #weaponsInstCoordAndWidthHeight;
     #ennemiInstCoordAndWidthHeight;
+    #playerCoordinates;
 
     constructor() {
         this.utils = utilsInstance;
         this.#weaponsInstCoordAndWidthHeight = [];
         this.#ennemiInstCoordAndWidthHeight = [];
+        this.#playerCoordinates = null;
     }
-    bb;
 
     /**
      * Prépare les data pour analyse des collisions
@@ -26,6 +27,22 @@ export class CollisionWeapons {
         });
 
         this.calculateCollision(this.#weaponsInstCoordAndWidthHeight, this.#ennemiInstCoordAndWidthHeight);
+    }
+
+    /**
+     * Vérifie les collisions entre le joueur et les ennemis
+     * @param { { x: number, y: number, xMax: number, yMax: number } } playerCoordinates - Coordonnées du joueur
+     * @param {Array} ennemiInstances - Instances des ennemis
+     * @param {'bloc' | 'ennemi'} typeOfEnnemi - Type d'ennemi
+     */
+    checkPlayerCollision(playerCoordinates, ennemiInstances, typeOfEnnemi) {
+        this.#playerCoordinates = playerCoordinates;
+
+        this.#ennemiInstCoordAndWidthHeight = ennemiInstances.map((ennemiInstance) => {
+            return { ...ennemiInstance.coordinatesWithWidthAndHeight, life: ennemiInstance.life, typeOfEnnemi };
+        });
+
+        this.calculatePlayerCollision(this.#playerCoordinates, this.#ennemiInstCoordAndWidthHeight);
     }
 
     /**
@@ -63,47 +80,29 @@ export class CollisionWeapons {
             });
         });
     }
+
+    /**
+     * Calcule si collision effective entre le joueur et les ennemis
+     * @param { { x: number, y: number, xMax: number, yMax: number } } playerCoordinates
+     * @param { { xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[] } ennemiInstancesAndcoord
+     */
+    calculatePlayerCollision({ x, y, xMax, yMax }, ennemiInstancesAndcoord) {
+        ennemiInstancesAndcoord.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax, life, typeOfEnnemi, damage: ennemiDamage }, indexEnnemi) => {
+            if (
+                ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
+                ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
+            ) {
+                this.utils.$("html").dispatchEvent(
+                    new CustomEvent("playerCollision", {
+                        detail: {
+                            ennemiIndex: indexEnnemi,
+                            ennemiLife: life,
+                            typeOfEnnemi,
+                            damage: ennemiDamage // Dommage de base que le joueur subit, à ajuster selon les besoins
+                        },
+                    })
+                );
+            }
+        });
+    }
 }
-
-// export class Collision {
-//     constructor(gameInstance) {
-//         this.gameInstance = gameInstance;
-//         this.instancesCoordinatesAndWidthHeight;
-//     }
-
-//     /**
-//      * Analyse si collision
-//      * @param { { x: number, y: number, xMax: number, yMax: number } } coordsPlayerWidthAndHeight
-//      * @param {'bloc' | 'ennemi'} typeEnnemi
-//      */
-//     checkIfCollision(coordsPlayerWidthAndHeight, typeEnnemi) {
-//         this.instancesCoordinatesAndWidthHeight = this.gameInstance.allInstances[typeEnnemi].map(
-//             (ennemiInstance) => {
-//                 return ennemiInstance.coordinatesWithWidthAndHeight;
-//             }
-//         );
-//         this.calculateCollision(coordsPlayerWidthAndHeight, this.instancesCoordinatesAndWidthHeight);
-//     }
-
-//     /**
-//      * Calcule si collision effective
-//      * @param { { x: number, y: number, xMax: number, yMax: number } } coordsPlayerWidthAndHeight
-//      * @param { { xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[] } arrEnnemisTotalCoordinates
-//      */
-//     calculateCollision({ x, y, xMax, yMax }, arrEnnemisTotalCoordinates) {
-//         arrEnnemisTotalCoordinates.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax }, index) => {
-//             if (
-//                 ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
-//                 ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
-//             ) {
-//                 document.dispatchEvent(
-//                     new CustomEvent("collision", {
-//                         detail: {
-//                             ennemiIndex: index,
-//                         },
-//                     })
-//                 );
-//             }
-//         });
-//     }
-// }

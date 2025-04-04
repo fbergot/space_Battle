@@ -14,16 +14,16 @@ class GameParameters {
         this.lifeHTML.innerText = this.lifesPlayer;
         this.ennemisHTML = this.utils.$("#ennemis");
 
-        this.utils.addEvListener(
-            "html",
-            "setEnnemis",
-            (e) => {
-                this.ennemisHTML.innerText = e.detail.nbEnnemis;
-                this.nbEnnemisInLive = e.detail.nbEnnemis;
-                this.utils.displayEnnemis(e.detail.nbEnnemis);
-            },
-            { once: false }
-        );
+        // this.utils.addEvListener(
+        //     "html",
+        //     "setEnnemis",
+        //     (e) => {
+        //         this.ennemisHTML.innerText = e.detail.nbEnnemis;
+        //         this.nbEnnemisInLive = e.detail.nbEnnemis;
+        //         this.utils.displayEnnemis(e.detail.nbEnnemis);
+        //     },
+        //     { once: false }
+        // );
 
         this.utils.addEvListener(
             "html",

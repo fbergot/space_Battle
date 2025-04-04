@@ -27,6 +27,19 @@ class Game {
         this.utils.$("#background").style.width = `${this.canvas.canvasWidth}px`;
         this.utils.$("#background").style.height = `${this.canvas.canvasHeight}px`;
         this.utils.setCSSVar("--widthCanvas", `${this.canvas.canvasWidth}px`);
+
+        // Event listener for player collision
+        document.querySelector("html").addEventListener("playerCollision", (e) => {
+            const { ennemiIndex, ennemiLife, typeOfEnnemi, damage } = e.detail;
+            // Reduce player's life
+            this.playerInstance.life -= damage;
+            // Check if the player is dead
+            if (this.playerInstance.life <= 0) {
+                this.gameOver();
+            }
+            // Add visual damage effects
+            this.playerInstance.showDamageEffect();
+        });
     }
 
     /**
@@ -93,9 +106,22 @@ class Game {
                 this.allInstances.instancesEnnemi,
                 typeEnnemis
             );
+            this.managerCollisionInstance.checkPlayerCollision (
+                this.playerInstance.newCoordinatesPlayer,
+                this.allInstances.instancesEnnemi,
+                typeEnnemis
+            );
         }
 
         this.idTimer = window.requestAnimationFrame(() => this.renderLoop.call(this, typeEnnemis));
+    }
+
+    /**
+     * Handle game over logic
+     */
+    gameOver() {
+        alert("Game Over");
+        // Additional game over logic can be added here
     }
 }
 

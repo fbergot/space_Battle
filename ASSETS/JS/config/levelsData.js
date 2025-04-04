@@ -4,6 +4,7 @@ export const levelsData = [
             nb: 5,
             type: "fusee",
             life: 10,
+            damage: 1,
             widthAndHeight: [71, 98],
         },
         player: {
@@ -24,6 +25,7 @@ export const levelsData = [
             nb: 5,
             type: "soucoupe",
             life: 10,
+            damage: 1,
             widthAndHeight: [100, 54],
         },
         player: {
@@ -44,6 +46,7 @@ export const levelsData = [
             nb: 5,
             type: "bloc",
             life: 15,
+            damage: 1,
         },
         player: {
             rockets: {
@@ -63,6 +66,7 @@ export const levelsData = [
             nb: 8,
             type: "soucoupe",
             life: 10,
+            damage: 1,
             widthAndHeight: [100, 54],
         },
         player: {
@@ -83,6 +87,7 @@ export const levelsData = [
             nb: 12,
             type: "soucoupe",
             life: 10,
+            damage: 1,
             widthAndHeight: [100, 54],
         },
         player: {

@@ -94,6 +94,13 @@ class Soucoupe {
     }
 
     /**
+     * Update showDamageEffect and draw on canvas player
+     */
+    showDamageEffect() {
+        this.ctx.fillStyle = "red";
+        this.ctx.fillRect(this.#x, this.#y, this.width, this.height);
+    }
+    /**
      * Update position and draw on canvas player
      */
     update() {

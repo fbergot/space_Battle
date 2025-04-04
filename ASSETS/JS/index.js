@@ -28,4 +28,4 @@ utils.addEvListener("html", "gamestart", () => {
 });
 
 const audio = utils.$("#audio1");
-audio.volume = 0.1;
+audio.volume = 1;

@@ -61,10 +61,7 @@ class Utils {
         const dictioPaths = {
             background: `./ASSETS/IMAGES/nebul.jpg`,
             player: {
-                player_DOWN: `./ASSETS/IMAGES/player_DOWN.png`,
                 player_UP: `./ASSETS/IMAGES/player_UP.png`,
-                player_LEFT: `./ASSETS/IMAGES/player_LEFT.png`,
-                player_RIGHT: `./ASSETS/IMAGES/player_RIGHT.png`,
             },
             ennemis: {
                 soucoupe: `./ASSETS/IMAGES/ennemi1-removebg.png`,
