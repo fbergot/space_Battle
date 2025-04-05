@@ -3,6 +3,7 @@ class Utils {
         this.$ = (selector) => document.querySelector(selector);
         this.$$ = (selector) => ment.querySelectorAll(selector);
         this.eventStartGame = new CustomEvent("gamestart");
+        this.dictioPaths;
     }
 
     /**
@@ -58,7 +59,7 @@ class Utils {
      * @returns {?string}
      */
     getImagePath(typeOfgroup, type = null) {
-        const dictioPaths = {
+        this.dictioPaths = {
             background: `./ASSETS/IMAGES/nebul.jpg`,
             player: {
                 player_UP: `./ASSETS/IMAGES/player_UP.png`,
@@ -72,13 +73,17 @@ class Utils {
             rocket: {
                 rocket_DOWN: `./ASSETS/IMAGES/rocket_DOWN.png`,
                 rocket_UP: `./ASSETS/IMAGES/rocket_UP.png`,
-                rocket_LEFT: `./ASSETS/IMAGES/rocket_LEFT.png`,
-                rocket_RIGHT: `./ASSETS/IMAGES/rocket_RIGHT.png`,
+            },
+            sounds: {
+                click: `./ASSETS/SOUNDS/click.mp3`,
+                explosion: `./ASSETS/SOUNDS/explosion.mp3`,
+                background: `./ASSETS/SOUNDS/08. Stormwind.mp3`,
+                collision: `./ASSETS/SOUNDS/08. Stormwind.mp3`,
             },
         };
 
-        if (type) return dictioPaths[typeOfgroup][type] || null;
-        return dictioPaths[typeOfgroup] || null;
+        if (type) return this.dictioPaths[typeOfgroup][type] || null;
+        return this.dictioPaths[typeOfgroup] || null;
     }
 
     /**
@@ -100,15 +105,15 @@ class Utils {
     /**
      * @param {number} nbEnnemis
      */
-    displayEnnemis(nbEnnemis) {
-        this.$(".allEnnemis").innerHTML = "";
+    // displayEnnemis(nbEnnemis) {
+    //     this.$(".allEnnemis").innerHTML = "";
 
-        let allEnnemis = "";
-        for (let i = 0; i < nbEnnemis; i++) {
-            allEnnemis = allEnnemis.concat(`<div class='iconEnnemi'>👽</div>`);
-        }
-        this.$(".allEnnemis").innerHTML = allEnnemis;
-    }
+    //     let allEnnemis = "";
+    //     for (let i = 0; i < nbEnnemis; i++) {
+    //         allEnnemis = allEnnemis.concat(`<div class='iconEnnemi'>👽</div>`);
+    //     }
+    //     this.$(".allEnnemis").innerHTML = allEnnemis;
+    // }
 
     /**
      *

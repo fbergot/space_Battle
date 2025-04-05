@@ -3,7 +3,8 @@ import UTILS from "./class/UTILS/Utils.js";
 import ManagerLevel from "./class/ManagerLevel/Level.js";
 import { levelsData } from "./config/levelsData.js";
 
-export const gameInstance = new Game();
+const startLifePlayer = 0;
+export const gameInstance = new Game(startLifePlayer);
 const utils = UTILS;
 
 /**
@@ -27,5 +28,6 @@ utils.addEvListener("html", "gamestart", () => {
     generator.next();
 });
 
-const audio = utils.$("#audio1");
-audio.volume = 1;
+utils.addEvListener("html", "gameover", () => {
+    generator.next();
+});

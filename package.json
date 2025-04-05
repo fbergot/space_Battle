@@ -7,6 +7,9 @@
   "author": "fBergot <florian.bergot564@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^10.4.16"
-  }
+    "autoprefixer": "^10.4.16",
+    "eslint": "^9.24.0",
+    "prettier": "^3.5.3"
+  },
+  "dependencies": {}
 }

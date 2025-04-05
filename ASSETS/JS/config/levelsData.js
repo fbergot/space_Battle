@@ -8,6 +8,8 @@ export const levelsData = [
             widthAndHeight: [71, 98],
         },
         player: {
+            life: 3,
+            widthAndHeight: [70, 100],
             rockets: {
                 nb: 10,
                 damage: 5,
@@ -29,6 +31,8 @@ export const levelsData = [
             widthAndHeight: [100, 54],
         },
         player: {
+            life: 3,
+            widthAndHeight: [70, 100],
             rockets: {
                 nb: 10,
                 damage: 5,
@@ -49,6 +53,8 @@ export const levelsData = [
             damage: 1,
         },
         player: {
+            life: 3,
+            widthAndHeight: [70, 100],
             rockets: {
                 nb: 10,
                 damage: 5,
@@ -70,6 +76,8 @@ export const levelsData = [
             widthAndHeight: [100, 54],
         },
         player: {
+            life: 3,
+            widthAndHeight: [70, 100],
             rockets: {
                 nb: 10,
                 damage: 5,
@@ -91,6 +99,8 @@ export const levelsData = [
             widthAndHeight: [100, 54],
         },
         player: {
+            life: 3,
+            widthAndHeight: [70, 100],
             rockets: {
                 nb: 10,
                 damage: 5,

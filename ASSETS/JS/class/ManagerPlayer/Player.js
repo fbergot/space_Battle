@@ -20,7 +20,7 @@ class Soucoupe {
         this.PositionInstance = new ManagerPosition(this, this.speedInstance);
         this.managerRocketInstance = new ManagerRocket(this);
         this.utils = utilsInstance;
-        this.image = null;
+        this.image = this.utils.makeImage("player", `player_UP`);
         this.canvas = Canvas;
         this.ctx = this.canvas.ctx;
         this.widthAndHeightDic = [70, 100];
@@ -30,6 +30,9 @@ class Soucoupe {
         this.#x = this.utils.randomMinMax(1, this.canvas.canvasWidth - 26.6);
         this.#y = this.canvas.canvasHeight - this.widthAndHeightDic[1] - 10;
         this.#life;
+        this.isShowingDamage = false;
+        this.damageEffectStartTime = 0;
+        this.damageEffectDuration = 500;
     }
 
     /**
@@ -43,6 +46,10 @@ class Soucoupe {
      * @param {number}
      */
     set currentLife(value) {
+        if (value < this.#life) {
+            this.isShowingDamage = true;
+            this.damageEffectStartTime = Date.now();
+        }
         this.#life = value;
     }
 
@@ -97,21 +104,63 @@ class Soucoupe {
      * Update showDamageEffect and draw on canvas player
      */
     showDamageEffect() {
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.#x, this.#y, this.width, this.height);
+        // Paramètres pour les particules d'explosion
+        const numParticles = 10;
+        const colors = ["#ff0000", "#ff5500", "#ffaa00", "#ffff00", "#ffffff"];
+        const maxRadius = 8;
+        const maxSpeed = 3;
+        const duration = 300; // durée de l'effet en millisecondes
+
+        // Générer les particules d'explosion autour du joueur
+        for (let i = 0; i < numParticles; i++) {
+            // Position aléatoire autour du centre du joueur
+            const centerX = this.#x + this.width / 2;
+            const centerY = this.#y + this.height;
+
+            // Taille et couleur aléatoires pour chaque particule
+            const radius = Math.random() * maxRadius + 1;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Direction aléatoire
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 50 + 10;
+
+            // Position de la particule
+            const x = centerX + Math.cos(angle) * distance;
+            const y = centerY + Math.sin(angle) * distance;
+
+            // Dessiner la particule
+            this.ctx.beginPath();
+            this.ctx.arc(x, y, radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = color;
+            this.ctx.fill();
+        }
     }
+
     /**
      * Update position and draw on canvas player
      */
     update() {
         this.PositionInstance.updateCoordinates();
-        this.image = this.utils.makeImage("player", `player_UP`);
         this.managerRocketInstance.update();
-        this.draw();
+
+        // Vérifier si nous devons afficher l'effet de dommage
+        if (this.isShowingDamage) {
+            const currentTime = Date.now();
+            if (currentTime - this.damageEffectStartTime < this.damageEffectDuration) {
+                this.draw();
+                this.showDamageEffect();
+            } else {
+                this.isShowingDamage = false;
+                this.draw();
+            }
+        } else {
+            this.draw();
+        }
     }
 
     /**
-     * Draw the image on the canvas
+     * Draws the player's image on the canvas at the current coordinates.
      */
     draw() {
         this.ctx.drawImage(this.image, this.#x, this.#y, this.width, this.height);

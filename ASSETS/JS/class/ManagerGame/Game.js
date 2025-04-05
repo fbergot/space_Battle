@@ -6,14 +6,16 @@ import { CollisionWeapons } from "../ManagerCollision/Collision.js";
 import ManagerEnnemis from "../ManagerEnnemi/ManagerEnnemis.js";
 import GameParameters from "./GameParameters.js";
 import Bloc from "../ManagerBloc/Bloc.js";
-import ManagerRocket from "../ManagerRocket/ManagerRocket.js";
+import { AudioManager } from "../AudioManager/AudioManager.js";
 
 class Game {
-    constructor() {
+    constructor(startLifePlayer) {
+        this.audioManager = new AudioManager();
         this.managerBlocInstance = new ManagerBloc();
         this.managerEnnemisInstance = new ManagerEnnemis();
         this.playerInstance = new Player();
-        this.gameParameters = new GameParameters(0, {
+        this.startLifePlayer = startLifePlayer;
+        this.gameParameters = new GameParameters(this.startLifePlayer, {
             managerBlocInstance: this.managerBlocInstance,
             managerEnnemisInstance: this.managerEnnemisInstance,
             managerRocketInstance: this.playerInstance.managerRocketInstance,
@@ -29,12 +31,18 @@ class Game {
         this.utils.setCSSVar("--widthCanvas", `${this.canvas.canvasWidth}px`);
 
         // Event listener for player collision
-        document.querySelector("html").addEventListener("playerCollision", (e) => {
-            const { ennemiIndex, ennemiLife, typeOfEnnemi, damage } = e.detail;
-            // Reduce player's life
-            this.playerInstance.life -= damage;
+        this.utils.addEvListener("html", "playerCollision", (e) => {
+            this.playerInstance.currentLife -= e.detail.damage;
+
+            console.log("Player life: ", e.detail.ennemiIndex);
+
             // Check if the player is dead
-            if (this.playerInstance.life <= 0) {
+            if (["soucoupe", "fusee"].includes(e.detail.typeOfEnnemi)) {
+                this.managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
+                // this.gameParameters.ennemisFunc.call(this, e);
+            }
+
+            if (this.playerInstance.currentLife <= 0) {
                 this.gameOver();
             }
             // Add visual damage effects
@@ -48,8 +56,8 @@ class Game {
      * @param {'bloc' | 'ennemi'} typeofInstance
      */
     initInstances(dataCurrentLevel) {
-        // on actualise les dommage des rockets selon le level
         this.playerInstance.managerRocketInstance.currentDamage = dataCurrentLevel.player.rockets.damage;
+        this.playerInstance.currentLife = dataCurrentLevel.player.life;
 
         if (dataCurrentLevel.ennemis.type === "bloc") {
             this.managerBlocInstance.generation(dataCurrentLevel);
@@ -95,7 +103,7 @@ class Game {
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.managerRocketInstance.instances,
                 this.allInstances.instancesBloc,
-                typeEnnemis
+                typeEnnemis,
             );
         }
 
@@ -104,12 +112,15 @@ class Game {
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.managerRocketInstance.instances,
                 this.allInstances.instancesEnnemi,
-                typeEnnemis
+                typeEnnemis,
             );
-            this.managerCollisionInstance.checkPlayerCollision (
+        }
+
+        if (typeEnnemis) {
+            this.managerCollisionInstance.checkPlayerCollision(
                 this.playerInstance.newCoordinatesPlayer,
                 this.allInstances.instancesEnnemi,
-                typeEnnemis
+                typeEnnemis,
             );
         }
 
@@ -120,8 +131,7 @@ class Game {
      * Handle game over logic
      */
     gameOver() {
-        alert("Game Over");
-        // Additional game over logic can be added here
+        this.stopRenderLoop();
     }
 }
 

@@ -74,7 +74,7 @@ export class CollisionWeapons {
                                 rocketDamage: damage,
                                 typeOfEnnemi,
                             },
-                        })
+                        }),
                     );
                 }
             });
@@ -87,22 +87,24 @@ export class CollisionWeapons {
      * @param { { xEnn: number, yEnn: number, xEnnMax: number, yEnnMax: number }[] } ennemiInstancesAndcoord
      */
     calculatePlayerCollision({ x, y, xMax, yMax }, ennemiInstancesAndcoord) {
-        ennemiInstancesAndcoord.forEach(({ xEnn, yEnn, xEnnMax, yEnnMax, life, typeOfEnnemi, damage: ennemiDamage }, indexEnnemi) => {
-            if (
-                ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
-                ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
-            ) {
-                this.utils.$("html").dispatchEvent(
-                    new CustomEvent("playerCollision", {
-                        detail: {
-                            ennemiIndex: indexEnnemi,
-                            ennemiLife: life,
-                            typeOfEnnemi,
-                            damage: ennemiDamage // Dommage de base que le joueur subit, à ajuster selon les besoins
-                        },
-                    })
-                );
-            }
-        });
+        ennemiInstancesAndcoord.forEach(
+            ({ xEnn, yEnn, xEnnMax, yEnnMax, life, typeOfEnnemi, damage: ennemiDamage }, indexEnnemi) => {
+                if (
+                    ((xMax >= xEnn && xMax <= xEnnMax) || (x <= xEnnMax && x >= xEnn)) &&
+                    ((y >= yEnn && y <= yEnnMax) || (yMax >= yEnn && yMax <= yEnnMax))
+                ) {
+                    this.utils.$("html").dispatchEvent(
+                        new CustomEvent("playerCollision", {
+                            detail: {
+                                ennemiIndex: indexEnnemi,
+                                ennemiLife: life,
+                                typeOfEnnemi,
+                                damage: 1, // Dommage de base que le joueur subit, à ajuster selon les besoins
+                            },
+                        }),
+                    );
+                }
+            },
+        );
     }
 }

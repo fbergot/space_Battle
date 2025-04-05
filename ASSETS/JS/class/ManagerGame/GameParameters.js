@@ -4,26 +4,15 @@ import utilsInstance from "../UTILS/Utils.js";
 
 class GameParameters {
     /**
-     * @param {number} startLife
-     * @param { { managerBlocInstance: Bloc, managerEnnemisInstance: Ennemi } } param1
+     * @param {number} startLifePlayer
+     * @param { { managerBlocInstance: Bloc, managerEnnemisInstance: Ennemi, managerRocketInstance: Rocket } } param1
      */
-    constructor(startLife, { managerBlocInstance, managerEnnemisInstance, managerRocketInstance }) {
-        this.lifesPlayer = startLife;
+    constructor(startLifePlayer, { managerBlocInstance, managerEnnemisInstance, managerRocketInstance }) {
+        this.startLifePlayer = startLifePlayer;
         this.utils = utilsInstance;
         this.lifeHTML = this.utils.$("#collision");
-        this.lifeHTML.innerText = this.lifesPlayer;
+        this.lifeHTML.innerText = this.startLifePlayer;
         this.ennemisHTML = this.utils.$("#ennemis");
-
-        // this.utils.addEvListener(
-        //     "html",
-        //     "setEnnemis",
-        //     (e) => {
-        //         this.ennemisHTML.innerText = e.detail.nbEnnemis;
-        //         this.nbEnnemisInLive = e.detail.nbEnnemis;
-        //         this.utils.displayEnnemis(e.detail.nbEnnemis);
-        //     },
-        //     { once: false }
-        // );
 
         this.utils.addEvListener(
             "html",
@@ -37,7 +26,7 @@ class GameParameters {
                     currentBloc.life = currentBloc.life - e.detail.rocketDamage;
                     if (currentBloc.life <= 0) {
                         managerBlocInstance.instancesPop(e.detail.ennemiIndex);
-                        this.ennemisFunc.call(this, e);
+                        // this.ennemisFunc.call(this, e);
                     }
                 }
 
@@ -46,11 +35,11 @@ class GameParameters {
                     currentEnnemi.life = currentEnnemi.life - e.detail.rocketDamage;
                     if (currentEnnemi.life <= 0) {
                         managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
-                        this.ennemisFunc.call(this, e);
+                        // this.ennemisFunc.call(this, e);
                     }
                 }
             },
-            { once: false }
+            { once: false },
         );
     }
 
@@ -58,11 +47,11 @@ class GameParameters {
      *
      * @param {Event} e
      */
-    ennemisFunc(e) {
-        --this.nbEnnemisInLive;
-        this.ennemisHTML.innerText = this.nbEnnemisInLive;
-        this.utils.displayEnnemis(this.nbEnnemisInLive);
-    }
+    // ennemisFunc(e) {
+    //     --this.nbEnnemisInLive;
+    //     this.ennemisHTML.innerText = this.nbEnnemisInLive;
+    //     // this.utils.displayEnnemis(this.nbEnnemisInLive);
+    // }
 
     /**
      *
