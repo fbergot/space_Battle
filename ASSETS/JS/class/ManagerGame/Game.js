@@ -40,6 +40,8 @@ class Game {
             if (["soucoupe", "fusee"].includes(e.detail.typeOfEnnemi)) {
                 this.managerEnnemisInstance.instancesPop(e.detail.ennemiIndex);
                 // this.gameParameters.ennemisFunc.call(this, e);
+            } else if (e.detail.typeOfEnnemi === "bloc") {
+                this.managerBlocInstance.instancesPop(e.detail.ennemiIndex);
             }
 
             if (this.playerInstance.currentLife <= 0) {
@@ -99,7 +101,7 @@ class Game {
         this.playerInstance.update();
 
         if (typeEnnemis === "bloc") {
-            this.managerBlocInstance.update();
+            this.managerBlocInstance.update(this.playerInstance.coordinates);
             this.managerCollisionInstance.checkIfCollision(
                 this.playerInstance.managerRocketInstance.instances,
                 this.allInstances.instancesBloc,

@@ -2,6 +2,24 @@ export const levelsData = [
     {
         ennemis: {
             nb: 5,
+            type: "bloc",
+            life: 15,
+            damage: 1,
+        },
+        player: {
+            life: 3,
+            widthAndHeight: [70, 100],
+            rockets: {
+                nb: 10,
+                damage: 5,
+            },
+        },
+        levelTime: 20000,
+        level: 3,
+    },
+    {
+        ennemis: {
+            nb: 5,
             type: "fusee",
             life: 10,
             damage: 1,
@@ -15,7 +33,7 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 30000,
+        levelTime: 20000,
         level: 1,
     },
     {
@@ -38,7 +56,7 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 30000,
+        levelTime: 20000,
         level: 2,
     },
     {
@@ -60,7 +78,7 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 30000,
+        levelTime: 20000,
         level: 3,
     },
     {
@@ -83,7 +101,7 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 30000,
+        levelTime: 20000,
         level: 4,
     },
     {
@@ -106,7 +124,7 @@ export const levelsData = [
                 damage: 5,
             },
         },
-        levelTime: 30000,
+        levelTime: 20000,
         level: 5,
     },
     {
